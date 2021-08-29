@@ -23,7 +23,7 @@ function User() {
 	useEffect(() => {
 		setRestaurants([]);
 		setIsFetching(true);
-		
+
 		getBasicRestaurantsData(query).then((data) => {
 			setRestaurants(data);
 			setIsFetching(false);
@@ -42,7 +42,7 @@ function User() {
 			<p>Find the next hottest burger restaurant in town. Your next burger experience eagerly awaits you.</p>
 			<AppSearchForm query={query} />
 			<section className="mt-6">
-				{(query && isFetching) && (
+				{(isFetching) && (
 					<>
 						<GenericHeading level={2}>Please hold for burger&hellip;</GenericHeading>
 						<div className="grid grid-cols-1 grid-flow-row-dense sm:grid-cols-2 xl:grid-cols-3 gap-8">
@@ -52,9 +52,12 @@ function User() {
 						</div>
 					</>
 				)}
-				{!!(query && !isFetching && restaurants.length) && (
+				{(!isFetching && !!restaurants.length) && (
 					<>
-						<GenericHeading level={2}>Showing {restaurants.length} {pluralize(restaurants.length, 'result')} for &ldquo;<span className="text-gradient">{query}</span>&rdquo;</GenericHeading>
+						<GenericHeading level={2}>
+							Showing {restaurants.length} delicious {pluralize(restaurants.length, 'result')}
+							{!!query && <span>for &ldquo;<span className="text-gradient">{query}</span>&rdquo;</span>}
+						</GenericHeading>
 						<div className="grid grid-cols-1 grid-flow-row-dense sm:grid-cols-2 xl:grid-cols-3 gap-8">
 							{restaurants.map(restaurant => getRestaurantDom(restaurant))}
 						</div>
