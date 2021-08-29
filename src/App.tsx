@@ -8,6 +8,7 @@ import AppHeader from './components/AppHeader/AppHeader';
 import Home from './pages/Home';
 import Discover from './pages/Discover';
 import User from './pages/User';
+import NotFound from './pages/NotFound';
 
 // Router imports
 import {
@@ -24,15 +25,10 @@ class App extends Component {
           <AppHeader />
           <section>
             <Switch>
-              <Route exact path="/">
-                <Home />
-              </Route>
-              <Route exact path="/discover">
-                <Discover />
-              </Route>
-              <Route exact path="/user">
-                <User />
-              </Route>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/discover" component={Discover} />
+              <Route exact path="/user" component={User} />
+              <Route component={NotFound}></Route>
             </Switch>
           </section>
         </main>

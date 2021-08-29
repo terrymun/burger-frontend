@@ -1,0 +1,15 @@
+import LayoutContainer from '../components/LayoutContainer';
+import GenericHeading from '../components/GenericHeading/GenericHeading';
+
+/** @method */
+function NotFound() {
+	return (
+		<LayoutContainer tag="section" className="py-6">
+			<GenericHeading level={1}>Oh my <span className="text-gradient">burgers</span>!</GenericHeading>
+			<p>We are unfortunately unable to locate the page you are looking for&mdash;the link might have expired or the page may have been moved.</p>
+			<p>However, that does not stop you from looking for burgers:</p>
+		</LayoutContainer>
+	);
+}
+
+export default NotFound;

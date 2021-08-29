@@ -22,6 +22,11 @@ code {
     monospace;
 }
 
+p {
+  margin-top: theme('margin.6');
+  margin-bottom: theme('margin.6');
+}
+
 .text-gradient {
   background-image: linear-gradient(to bottom right, theme('colors.blue.700'), theme('colors.green.700')); 
   -webkit-background-clip: text;
