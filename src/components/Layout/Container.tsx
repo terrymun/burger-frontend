@@ -12,7 +12,7 @@ interface LayoutContainerProps extends Partial<SlottableComponent>, Partial<Clas
  */
 function LayoutContainer(props: LayoutContainerProps) {
 	const TagName = (props.tag ?? 'div') as keyof JSX.IntrinsicElements;
-	const defaultClassNames = 'px-6 md:max-w-3xl md:px-16 lg:max-w-6xl md:mx-auto';
+	const defaultClassNames = 'px-6 md:max-w-3xl lg:max-w-screen-lg xl:max-w-screen-xl md:mx-auto';
 	const classNames = [...(props.className ?? '').split(' '), ...defaultClassNames.split(' ')].join(' ');
 
 	return (

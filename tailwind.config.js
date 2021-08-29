@@ -5,9 +5,12 @@ module.exports = {
     extend: {},
   },
   variants: {
-    extend: {},
+    extend: {
+      scale: ['active']
+    },
   },
   plugins: [
-    require('@tailwindcss/forms')
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/line-clamp')
   ],
 }
