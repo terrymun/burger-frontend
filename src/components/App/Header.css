@@ -1,9 +1,0 @@
-.is-active {
-	color: theme('colors.blue.700');
-}
-
-@media (prefers-color-scheme: dark) {
-  .is-active {
-		color: theme('colors.blue.300');
-  }
-}

@@ -1,5 +1,5 @@
 // Asset imports
-import './Header.css';
+import './Header.scss';
 
 // Router imports
 import { NavLink } from "react-router-dom";
@@ -7,10 +7,11 @@ import { NavLink } from "react-router-dom";
 // Component imports
 import GenericIcon from '../Generic/Icon';
 import LayoutContainer from '../Layout/Container';
-import { CarbonIconType, Home16, LocationHeartFilled16, UserAvatarFilled24 } from '@carbon/icons-react';
+import { Asleep16, CarbonIconType, Home24, Light16, LocationStar24, UserAvatarFilled24 } from '@carbon/icons-react';
 
 // NOTE: User data should be populated by JWT and some kind of global state management system (e.g. Redux)
 import { userData } from '../../constants/user';
+import { useEffect, useState } from 'react';
 
 /** @interface */
 interface NavigationItem {
@@ -23,21 +24,28 @@ interface NavigationItem {
 
 /** @method */
 function AppHeader() {
+	const [shouldUseDarkTheme, setShouldUseDarkTheme] = useState(false);
+	const toggleDarkTheme = () => {
+		setShouldUseDarkTheme(!shouldUseDarkTheme);
+	};
+	useEffect(() => {
+		document.documentElement.classList.toggle('dark', shouldUseDarkTheme);
+	});
+
 	const items: NavigationItem[] = [{
 		path: '/',
 		title: 'Home',
 		text: 'Home',
-		icon: Home16,
+		icon: Home24,
 		textClassName: 'hidden md:block'
 	}, {
 		path: '/discover',
 		title: 'Discover',
 		text: 'Discover',
-		icon: LocationHeartFilled16,
+		icon: LocationStar24,
 	}];
 
 	const listItems = items.map(({ path, title, text, textClassName, icon }) => {
-		
 		return (
 			<li key={path} className="flex items-center">
 				<NavLink
@@ -45,7 +53,7 @@ function AppHeader() {
 					to={path}
 					title={title}
 					activeClassName="is-active"
-					className="py-6 mr-3 md:mr-6 lg:mr-9 flex justify-center items-center gap-1 uppercase font-bold text-sm hover:text-blue-700 dark:hover:text-blue-300 transition-all">
+					className="py-6 mr-3 md:mr-6 lg:mr-9 flex justify-center items-center gap-1 uppercase font-bold text-sm hover:text-blue-700 dark:hover:text-blue-300 transition-colors">
 					{!!icon && <GenericIcon name={icon} /> }
 					<span className={textClassName ?? 'block'}>{text}</span>
 				</NavLink>
@@ -54,18 +62,35 @@ function AppHeader() {
 	});
 
 	return (
-		<header className="sticky top-0 z-10 bg-gray-50 dark:bg-gray-900 backdrop-filter backdrop-blur-sm bg-opacity-90">
+		<header className="sticky top-0 z-10 bg-gray-50 dark:bg-gray-900 backdrop-filter backdrop-blur-sm bg-opacity-90 transition-colors">
 			<LayoutContainer className="flex justify-between items-center">
 				<ul className="list-none flex">
 					{listItems}
 				</ul>
-				<NavLink
-					exact
-					to="/user"
-					className="py-6 flex justify-center items-center gap-1 text-sm hover:text-blue-700 dark:hover:text-blue-300 transition-all">
-					<UserAvatarFilled24 />
-					{userData.firstName}
-				</NavLink>
+				<ul className="list-none flex">
+					<li className="flex items-center">
+						<NavLink
+							exact
+							to="/user"
+							className="py-6 flex justify-center items-center gap-1 text-sm hover:text-blue-700 dark:hover:text-blue-300 transition-colors">
+							<UserAvatarFilled24 />
+							Hello, <strong>{userData.firstName}</strong>
+						</NavLink>
+					</li>
+					<li className="flex items-center">
+						<button
+							className="flex items-center contents-center p-2 rounded-md ml-6 transition-colors
+								bg-yellow-500 text-gray-800 dark:bg-purple-800 dark:text-gray-100
+								focus:ring-yellow-500 dark:focus:ring-purple-600
+								border-0 focus:outline-none focus:ring-2 focus:ring-opacity-25"
+							title="Toggle dark theme"
+							onClick={toggleDarkTheme}>
+							{!shouldUseDarkTheme && <Light16 />}
+							{shouldUseDarkTheme && <Asleep16 />}
+						</button>
+					</li>
+				</ul>
+				
 			</LayoutContainer>
 		</header>
 	);

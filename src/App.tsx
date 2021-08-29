@@ -21,9 +21,9 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <main className="app">
+        <main className="app flex flex-col">
           <AppHeader />
-          <section>
+          <section className="h-full">
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/discover" component={Discover} />

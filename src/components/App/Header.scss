@@ -1,0 +1,10 @@
+.is-active {
+	color: theme('colors.blue.500');
+}
+
+//@media (prefers-color-scheme: dark) {
+html.dark {
+  .is-active {
+		color: theme('colors.blue.300');
+  }
+}

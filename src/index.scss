@@ -28,12 +28,13 @@ p {
 }
 
 .text-gradient {
-  background-image: linear-gradient(to bottom right, theme('colors.blue.700'), theme('colors.green.700')); 
+  background-image: linear-gradient(to bottom right, theme('colors.blue.500'), theme('colors.green.500')); 
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-@media (prefers-color-scheme: dark) {
+//@media (prefers-color-scheme: dark) {
+html.dark {
   .text-gradient {
     background-image: linear-gradient(to bottom right, theme('colors.blue.300'), theme('colors.green.300')); 
   }
