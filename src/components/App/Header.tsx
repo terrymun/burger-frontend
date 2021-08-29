@@ -1,12 +1,12 @@
 // Asset imports
-import './AppHeader.css';
+import './Header.css';
 
 // Router imports
 import { NavLink } from "react-router-dom";
 
 // Component imports
-import GenericIcon from '../GenericIcon/GenericIcon';
-import LayoutContainer from '../LayoutContainer';
+import GenericIcon from '../Generic/Icon';
+import LayoutContainer from '../Layout/Container';
 import { CarbonIconType, Home16, LocationHeartFilled16, UserAvatarFilled24 } from '@carbon/icons-react';
 
 // NOTE: User data should be populated by JWT and some kind of global state management system (e.g. Redux)

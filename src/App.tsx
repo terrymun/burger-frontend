@@ -4,7 +4,7 @@ import { Component } from 'react';
 import './App.css';
 
 // Component imports
-import AppHeader from './components/AppHeader/AppHeader';
+import AppHeader from './components/App/Header';
 import Home from './pages/Home';
 import Discover from './pages/Discover';
 import User from './pages/User';

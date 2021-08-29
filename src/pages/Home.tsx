@@ -1,4 +1,4 @@
-import GenericHeading from '../components/GenericHeading/GenericHeading';
+import GenericHeading from '../components/Generic/Heading';
 
 /** @method */
 function Home() {

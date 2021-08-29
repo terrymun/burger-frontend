@@ -1,5 +1,5 @@
-import GenericHeading from '../components/GenericHeading/GenericHeading';
-import LayoutContainer from '../components/LayoutContainer';
+import GenericHeading from '../components/Generic/Heading';
+import LayoutContainer from '../components/Layout/Container';
 
 // NOTE: User data should be populated by JWT and some kind of global state management system (e.g. Redux)
 import { userData } from '../constants/user';

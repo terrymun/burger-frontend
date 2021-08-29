@@ -1,5 +1,5 @@
-import GenericHeading from '../components/GenericHeading/GenericHeading';
-import LayoutContainer from '../components/LayoutContainer';
+import GenericHeading from '../components/Generic/Heading';
+import LayoutContainer from '../components/Layout/Container';
 
 /** @method */
 function User() {

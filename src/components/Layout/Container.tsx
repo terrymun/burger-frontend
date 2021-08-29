@@ -1,4 +1,4 @@
-import { ClassNameInheritableComponent, SlottableComponent } from "../interfaces/component";
+import { ClassNameInheritableComponent, SlottableComponent } from "../../interfaces/component";
 
 /** @interface */
 interface LayoutContainerProps extends Partial<SlottableComponent>, Partial<ClassNameInheritableComponent> {
