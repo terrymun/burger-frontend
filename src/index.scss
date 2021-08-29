@@ -28,7 +28,7 @@ p {
 }
 
 .text-gradient {
-  background-image: linear-gradient(to bottom right, theme('colors.blue.500'), theme('colors.green.500')); 
+  background-image: linear-gradient(to bottom right, theme('colors.yellow.500'), theme('colors.red.500')); 
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -36,6 +36,6 @@ p {
 //@media (prefers-color-scheme: dark) {
 html.dark {
   .text-gradient {
-    background-image: linear-gradient(to bottom right, theme('colors.blue.300'), theme('colors.green.300')); 
+    background-image: linear-gradient(to bottom right, theme('colors.yellow.300'), theme('colors.red.300')); 
   }
 }

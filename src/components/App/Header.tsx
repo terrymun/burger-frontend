@@ -53,7 +53,7 @@ function AppHeader() {
 					to={path}
 					title={title}
 					activeClassName="is-active"
-					className="py-6 mr-3 md:mr-6 lg:mr-9 flex justify-center items-center gap-1 uppercase font-bold text-sm hover:text-blue-700 dark:hover:text-blue-300 transition-colors">
+					className="py-6 mr-3 md:mr-6 lg:mr-9 flex justify-center items-center gap-1 uppercase font-bold text-sm hover:text-yellow-500 dark:hover:text-yellow-300 transition-colors">
 					{!!icon && <GenericIcon name={icon} /> }
 					<span className={textClassName ?? 'block'}>{text}</span>
 				</NavLink>
@@ -72,7 +72,7 @@ function AppHeader() {
 						<NavLink
 							exact
 							to="/user"
-							className="py-6 flex justify-center items-center gap-1 text-sm hover:text-blue-700 dark:hover:text-blue-300 transition-colors">
+							className="py-6 flex justify-center items-center gap-1 text-sm hover:text-yellow-500 dark:hover:text-yellow-300 transition-colors">
 							<UserAvatarFilled24 />
 							Hello, <strong>{userData.firstName}</strong>
 						</NavLink>
