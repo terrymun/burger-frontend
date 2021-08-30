@@ -147,7 +147,13 @@ function Restaurant() {
 		<article>
 			<header>
 				{isFetching ? (
-					<div className="h-96 bg-gray-800 animate-pulse"></div>
+					<div className="h-96 relative flex flex-col items-center justify-center text-white">
+						<div className="w-full h-full absolute inset-0 bg-gray-800 animate-pulse"></div>
+						<ProgressBarRound32 className="w-12 h-12 animate-spin relative" />
+						<p className="text-white relative">
+							Loading restaurant data&hellip;
+						</p>
+					</div>
 				) : (
 					<div className="h-96 relative bg-gray-800">
 						{!!restaurant && (
@@ -169,6 +175,16 @@ function Restaurant() {
 					</div>
 				)}
 			</header>
+			{isFetching && (
+				<>
+					<LayoutContainer tag="section" className="py-12">
+						<div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
+							<div className="rounded-md h-64 animate-pulse bg-gray-200 dark:bg-gray-600"></div>
+							<div className="rounded-md col-span-2 h-64 animate-pulse bg-gray-200 dark:bg-gray-600"></div>
+						</div>
+					</LayoutContainer>
+				</>
+			)}
 			{!!restaurant && (
 				<>
 					<LayoutContainer tag="section" className="py-12">
@@ -279,10 +295,11 @@ function Restaurant() {
 									</GenericHeading>
 									<div
 										className={
-											reviewPostingState !==
+											(reviewPostingState !==
 											ReviewPostingState.NONE
-												? 'opacity-10 pointer-events-none'
-												: 'opacity-100'
+												? 'opacity-30 pointer-events-none filter blur-sm'
+												: 'opacity-100') +
+											' transition-all'
 										}
 									>
 										<GenericFormFieldset legend="Overview">
