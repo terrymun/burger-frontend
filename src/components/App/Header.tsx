@@ -2,12 +2,19 @@
 import './Header.scss';
 
 // Router imports
-import { NavLink, NavLinkProps } from "react-router-dom";
+import { NavLink, NavLinkProps } from 'react-router-dom';
 
 // Component imports
 import GenericIcon from '../Generic/Icon';
 import LayoutContainer from '../Layout/Container';
-import { Asleep16, CarbonIconType, Home24, Light16, LocationStar24, UserAvatarFilled24 } from '@carbon/icons-react';
+import {
+	Asleep16,
+	CarbonIconType,
+	Home24,
+	Light16,
+	LocationStar24,
+	UserAvatarFilled24,
+} from '@carbon/icons-react';
 
 // NOTE: User data should be populated by JWT and some kind of global state management system (e.g. Redux)
 import { userData } from '../../constants/user';
@@ -33,54 +40,61 @@ function AppHeader() {
 		document.documentElement.classList.toggle('dark', shouldUseDarkTheme);
 	});
 
-	const items: NavigationItem[] = [{
-		path: '/',
-		title: 'Home',
-		text: 'Home',
-		icon: Home24,
-		textClassName: 'hidden md:block',
-		isActive: (match) => {
-			return !!match;
-		}
-	}, {
-		path: '/discover',
-		title: 'Discover',
-		text: 'Discover',
-		icon: LocationStar24,
-		isActive: (match, location) => {
-			return !!match || location.pathname.indexOf('/restaurant/') !== -1;
-		}
-	}];
+	const items: NavigationItem[] = [
+		{
+			path: '/',
+			title: 'Home',
+			text: 'Home',
+			icon: Home24,
+			textClassName: 'hidden md:block',
+			isActive: (match) => {
+				return !!match;
+			},
+		},
+		{
+			path: '/discover',
+			title: 'Discover',
+			text: 'Discover',
+			icon: LocationStar24,
+			isActive: (match, location) => {
+				return (
+					!!match || location.pathname.indexOf('/restaurant/') !== -1
+				);
+			},
+		},
+	];
 
-	const listItems = items.map(({ path, title, text, textClassName, icon, isActive }) => {
-		return (
-			<li key={path} className="flex items-center">
-				<NavLink
-					exact
-					to={path}
-					title={title}
-					isActive={isActive}
-					activeClassName="is-active"
-					className="py-6 mr-3 md:mr-6 lg:mr-9 flex justify-center items-center gap-1 uppercase font-bold text-sm hover:text-yellow-500 dark:hover:text-yellow-300 transition-colors">
-					{!!icon && <GenericIcon name={icon} /> }
-					<span className={textClassName ?? 'block'}>{text}</span>
-				</NavLink>
-			</li>
-		);
-	});
+	const listItems = items.map(
+		({ path, title, text, textClassName, icon, isActive }) => {
+			return (
+				<li key={path} className="flex items-center">
+					<NavLink
+						exact
+						to={path}
+						title={title}
+						isActive={isActive}
+						activeClassName="is-active"
+						className="py-6 mr-3 md:mr-6 lg:mr-9 flex justify-center items-center gap-1 uppercase font-bold text-sm hover:text-yellow-500 dark:hover:text-yellow-300 transition-colors"
+					>
+						{!!icon && <GenericIcon name={icon} />}
+						<span className={textClassName ?? 'block'}>{text}</span>
+					</NavLink>
+				</li>
+			);
+		}
+	);
 
 	return (
 		<header className="sticky top-0 z-10 bg-gray-50 dark:bg-gray-900 backdrop-filter backdrop-blur-sm bg-opacity-90 transition-colors">
 			<LayoutContainer className="flex justify-between items-center">
-				<ul className="list-none flex">
-					{listItems}
-				</ul>
+				<ul className="list-none flex">{listItems}</ul>
 				<ul className="list-none flex">
 					<li className="flex items-center">
 						<NavLink
 							exact
 							to="/user"
-							className="py-6 flex justify-center items-center gap-1 text-sm hover:text-yellow-500 dark:hover:text-yellow-300 transition-colors">
+							className="py-6 flex justify-center items-center gap-1 text-sm hover:text-yellow-500 dark:hover:text-yellow-300 transition-colors"
+						>
 							<UserAvatarFilled24 />
 							Hello, <strong>{userData.firstName}</strong>
 						</NavLink>
@@ -92,13 +106,13 @@ function AppHeader() {
 								focus:ring-yellow-500 dark:focus:ring-purple-600
 								border-0 focus:outline-none focus:ring-2 focus:ring-opacity-25"
 							title="Toggle dark theme"
-							onClick={toggleDarkTheme}>
+							onClick={toggleDarkTheme}
+						>
 							{!shouldUseDarkTheme && <Light16 />}
 							{shouldUseDarkTheme && <Asleep16 />}
 						</button>
 					</li>
 				</ul>
-				
 			</LayoutContainer>
 		</header>
 	);

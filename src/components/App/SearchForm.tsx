@@ -20,19 +20,24 @@ function AppSearchForm(props: AppSearchFormProps) {
 		e.preventDefault();
 		history.push({
 			pathname: '/discover',
-			search: `?q=${query}`
+			search: `?q=${query}`,
 		});
 	};
 
 	return (
 		<form onSubmit={submit}>
-				<div className="flex gap-1">
-					<GenericInputText type="search" placeholder="Search for burgers" value={query} onChange={e => setQuery(e.target.value)} />
-					<GenericButton role={searchButtonRole} type="submit">
-						<Search24 />
-					</GenericButton>
-				</div>
-			</form>
+			<div className="flex gap-1">
+				<GenericInputText
+					type="search"
+					placeholder="Search for burgers"
+					value={query}
+					onChange={(e) => setQuery(e.target.value)}
+				/>
+				<GenericButton role={searchButtonRole} type="submit">
+					<Search24 />
+				</GenericButton>
+			</div>
+		</form>
 	);
 }
 

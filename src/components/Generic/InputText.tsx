@@ -1,13 +1,14 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from 'react';
 
 // Interface imports
-import { TextLikeInputComponent } from "../../interfaces/component";
+import { TextLikeInputComponent } from '../../interfaces/component';
 
 // Component imports
-import GenericFormErrorMessage from "./FormErrorMessage";
+import GenericFormErrorMessage from './FormErrorMessage';
 
 /** @interface */
-interface GenericInputTextProps extends TextLikeInputComponent<HTMLInputElement> {
+interface GenericInputTextProps
+	extends TextLikeInputComponent<HTMLInputElement> {
 	type?: 'text' | 'password' | 'search';
 }
 
@@ -22,8 +23,8 @@ function GenericInputText(props: GenericInputTextProps) {
 	const onInvalid = (e: FormEvent<HTMLInputElement>): void => {
 		setErrorMessage((e.target as HTMLInputElement).validationMessage);
 		props.onInvalid && props.onInvalid(e);
-	}
-	
+	};
+
 	return (
 		<>
 			<input
@@ -40,8 +41,13 @@ function GenericInputText(props: GenericInputTextProps) {
 				placeholder={props.placeholder}
 				required={props.required}
 				onChange={onChange}
-				onInvalid={onInvalid} />
-			{!!errorMessage && <GenericFormErrorMessage>{errorMessage}</GenericFormErrorMessage>}
+				onInvalid={onInvalid}
+			/>
+			{!!errorMessage && (
+				<GenericFormErrorMessage>
+					{errorMessage}
+				</GenericFormErrorMessage>
+			)}
 		</>
 	);
 }

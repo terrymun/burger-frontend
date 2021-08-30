@@ -11,8 +11,9 @@
 			"**/.hg": true,
 			"**/CVS": true,
 			"**/.DS_Store": true,
-			"build": true,
+			"build": true
 		},
-		"scss.lint.unknownAtRules": "ignore"
+		"scss.lint.unknownAtRules": "ignore",
+		"editor.tabSize": 4
 	}
 }

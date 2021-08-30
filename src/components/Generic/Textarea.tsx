@@ -1,13 +1,14 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from 'react';
 
 // Interface imports
-import { TextLikeInputComponent } from "../../interfaces/component";
+import { TextLikeInputComponent } from '../../interfaces/component';
 
 // Component imports
-import GenericFormErrorMessage from "./FormErrorMessage";
+import GenericFormErrorMessage from './FormErrorMessage';
 
 /** @interface */
-interface GenericTextareaProps extends TextLikeInputComponent<HTMLTextAreaElement> {
+interface GenericTextareaProps
+	extends TextLikeInputComponent<HTMLTextAreaElement> {
 	rows?: number;
 }
 
@@ -22,7 +23,7 @@ function GenericTextarea(props: GenericTextareaProps) {
 	const onInvalid = (e: FormEvent<HTMLTextAreaElement>): void => {
 		setErrorMessage((e.target as HTMLTextAreaElement).validationMessage);
 		props.onInvalid && props.onInvalid(e);
-	}
+	};
 
 	return (
 		<>
@@ -40,8 +41,13 @@ function GenericTextarea(props: GenericTextareaProps) {
 				placeholder={props.placeholder}
 				required={props.required}
 				onChange={onChange}
-				onInvalid={onInvalid} />
-			{!!errorMessage && <GenericFormErrorMessage>{errorMessage}</GenericFormErrorMessage>}
+				onInvalid={onInvalid}
+			/>
+			{!!errorMessage && (
+				<GenericFormErrorMessage>
+					{errorMessage}
+				</GenericFormErrorMessage>
+			)}
 		</>
 	);
 }

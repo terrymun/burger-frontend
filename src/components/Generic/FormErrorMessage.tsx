@@ -1,9 +1,9 @@
 // Interface imports
-import { WarningFilled16 } from "@carbon/icons-react";
-import { SlottableComponent } from "../../interfaces/component";
+import { WarningFilled16 } from '@carbon/icons-react';
+import { SlottableComponent } from '../../interfaces/component';
 
 /** @interfae */
-interface GenericFormErrorMessageProps extends SlottableComponent {};
+interface GenericFormErrorMessageProps extends SlottableComponent {}
 
 /** @method */
 function GenericFormErrorMessage(props: GenericFormErrorMessageProps) {

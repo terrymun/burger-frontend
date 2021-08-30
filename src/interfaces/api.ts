@@ -15,7 +15,7 @@ export interface RestaurantDatum {
 	id: string;
 	name: string;
 	description: string;
-	businessHours: BusinessHours[]
+	businessHours: BusinessHours[];
 	address: string;
 	coordinates: [number, number];
 	ratingCount: number;

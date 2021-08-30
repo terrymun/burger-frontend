@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 /** @interfae */
 interface GenericFormFieldsetProps {
@@ -15,10 +15,11 @@ function GenericFormFieldset(props: GenericFormFieldsetProps) {
 					<div className="h-0.5 bg-gray-500 bg-opacity-25 w-full flex-1"></div>
 					{props.legend}
 					<div className="h-0.5 bg-gray-500 bg-opacity-25 w-full flex-1"></div>
-				</legend>)}
+				</legend>
+			)}
 			{props.children}
 		</fieldset>
-	)
+	);
 }
 
 export default GenericFormFieldset;

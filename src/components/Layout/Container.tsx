@@ -1,8 +1,13 @@
 // Interfacr imports
-import { ClassNameInheritableComponent, SlottableComponent } from "../../interfaces/component";
+import {
+	ClassNameInheritableComponent,
+	SlottableComponent,
+} from '../../interfaces/component';
 
 /** @interface */
-interface LayoutContainerProps extends Partial<SlottableComponent>, Partial<ClassNameInheritableComponent> {
+interface LayoutContainerProps
+	extends Partial<SlottableComponent>,
+		Partial<ClassNameInheritableComponent> {
 	tag?: string;
 }
 
@@ -13,14 +18,14 @@ interface LayoutContainerProps extends Partial<SlottableComponent>, Partial<Clas
  */
 function LayoutContainer(props: LayoutContainerProps) {
 	const TagName = (props.tag ?? 'div') as keyof JSX.IntrinsicElements;
-	const defaultClassNames = 'px-6 md:max-w-3xl lg:max-w-screen-lg xl:max-w-screen-xl md:mx-auto';
-	const classNames = [...(props.className ?? '').split(' '), ...defaultClassNames.split(' ')].join(' ');
+	const defaultClassNames =
+		'px-6 md:max-w-3xl lg:max-w-screen-lg xl:max-w-screen-xl md:mx-auto';
+	const classNames = [
+		...(props.className ?? '').split(' '),
+		...defaultClassNames.split(' '),
+	].join(' ');
 
-	return (
-		<TagName className={classNames}>
-			{props.children}
-		</TagName>
-	)
+	return <TagName className={classNames}>{props.children}</TagName>;
 }
 
 export default LayoutContainer;

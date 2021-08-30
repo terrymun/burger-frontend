@@ -1,4 +1,4 @@
-import { ChangeEventHandler, FormEventHandler, ReactNode } from "react";
+import { ChangeEventHandler, FormEventHandler, ReactNode } from 'react';
 
 /**
  * A component with children (aka slottable)

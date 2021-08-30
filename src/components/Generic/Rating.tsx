@@ -1,21 +1,29 @@
 // Component imports
-import { StarFilled16, StarHalf16, StarFilled32, StarHalf32, CarbonIconType, StarHalf24, StarFilled24 } from "@carbon/icons-react";
+import {
+	StarFilled16,
+	StarHalf16,
+	StarFilled32,
+	StarHalf32,
+	CarbonIconType,
+	StarHalf24,
+	StarFilled24,
+} from '@carbon/icons-react';
 
 // Framework imports
-import { repeat } from "../../framework/generic";
-import { clamp, roundTo } from "../../framework/math";
+import { repeat } from '../../framework/generic';
+import { clamp, roundTo } from '../../framework/math';
 
 /** @enum */
 export enum RatingIconSize {
 	SMALL,
 	MEDIUM,
-	LARGE
+	LARGE,
 }
 
 /** @interface */
 interface GenericRatingProp {
 	score: number;
-	iconSize?: RatingIconSize
+	iconSize?: RatingIconSize;
 }
 
 /** @method */
@@ -40,7 +48,7 @@ function GenericRating(prop: GenericRatingProp) {
 			FilledIcon = StarFilled24;
 			HalfFilledIcon = StarHalf24;
 	}
-	
+
 	const filledStarCount = Math.floor(score);
 	const halfStarCount = Math.round(score - filledStarCount);
 	const emptyStarCount = 5 - filledStarCount - halfStarCount;
@@ -61,13 +69,19 @@ function GenericRating(prop: GenericRatingProp) {
 		</span>
 	));
 	const emptyStars = repeat<JSX.Element>(emptyStarCount, (_, i) => (
-		<span key={`empty_${i}`} className="text-gray-300 dark:text-gray-600 transition-colors">
+		<span
+			key={`empty_${i}`}
+			className="text-gray-300 dark:text-gray-600 transition-colors"
+		>
 			<FilledIcon key={i} />
 		</span>
 	));
-	
+
 	return (
-		<div className="flex gap-x-0.5 w-min" title={`Average rating: ${score}`}>
+		<div
+			className="flex gap-x-0.5 w-min"
+			title={`Average rating: ${score}`}
+		>
 			{filledStars}
 			{halfStars}
 			{emptyStars}

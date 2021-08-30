@@ -1,4 +1,4 @@
-import { CarbonIconType } from "@carbon/icons-react";
+import { CarbonIconType } from '@carbon/icons-react';
 
 /** @interface */
 interface GenericIconProps {
@@ -9,11 +9,7 @@ interface GenericIconProps {
 function GenericIcon(props: GenericIconProps) {
 	const Icon = props.name;
 
-	return (
-		<>
-			{ Icon && <Icon />}
-		</>
-	);
+	return <>{Icon && <Icon />}</>;
 }
 
 export default GenericIcon;

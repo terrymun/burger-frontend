@@ -2,11 +2,16 @@
 import { clamp } from '../../framework/math';
 
 // Interface imports
-import { ClassNameInheritableComponent, SlottableComponent } from '../../interfaces/component';
+import {
+	ClassNameInheritableComponent,
+	SlottableComponent,
+} from '../../interfaces/component';
 
 /** @interface */
-interface GenericHeadingProps extends SlottableComponent, Partial<ClassNameInheritableComponent> {
-	level: 1 | 2 | 3 | 4 | 5 | 6
+interface GenericHeadingProps
+	extends SlottableComponent,
+		Partial<ClassNameInheritableComponent> {
+	level: 1 | 2 | 3 | 4 | 5 | 6;
 }
 
 /** @constant */
@@ -16,18 +21,23 @@ const textSizeClassName = {
 	'3': 'text-2xl md:text-3xl',
 	'4': 'text-xl md:text-2xl',
 	'5': 'text-lg md:text-xl',
-	'6': 'text-lg md:text-lg'
-}
+	'6': 'text-lg md:text-lg',
+};
 
 /** @method */
 function GenericHeading(props: GenericHeadingProps) {
 	const { level } = props;
 	const HeadingTag = `h${clamp(level, 1, 6)}` as keyof JSX.IntrinsicElements;
-	const classNames = [...(props.className ?? '').split(' '), 'font-bold', 'leading-tight', 'md:leading-tight', 'mb-3', textSizeClassName[level]].join(' ');
+	const classNames = [
+		...(props.className ?? '').split(' '),
+		'font-bold',
+		'leading-tight',
+		'md:leading-tight',
+		'mb-3',
+		textSizeClassName[level],
+	].join(' ');
 
-	return (
-		<HeadingTag className={classNames}>{props.children}</HeadingTag>
-	)
+	return <HeadingTag className={classNames}>{props.children}</HeadingTag>;
 }
 
 export default GenericHeading;
