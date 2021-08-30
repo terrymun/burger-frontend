@@ -8,10 +8,10 @@ import { NavLink, NavLinkProps } from 'react-router-dom';
 import GenericIcon from '../Generic/Icon';
 import LayoutContainer from '../Layout/Container';
 import {
-	Asleep16,
+	AsleepFilled16,
 	CarbonIconType,
 	Home24,
-	Light16,
+	LightFilled16,
 	LocationStar24,
 	UserAvatarFilled24,
 } from '@carbon/icons-react';
@@ -117,8 +117,8 @@ function AppHeader() {
 							title="Toggle dark theme"
 							onClick={toggleDarkTheme}
 						>
-							{!shouldUseDarkTheme && <Light16 />}
-							{shouldUseDarkTheme && <Asleep16 />}
+							{!shouldUseDarkTheme && <LightFilled16 />}
+							{shouldUseDarkTheme && <AsleepFilled16 />}
 						</button>
 					</li>
 				</ul>

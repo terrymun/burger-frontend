@@ -71,7 +71,7 @@ function User() {
 				)}
 				{!isFetching && !!restaurants.length && (
 					<>
-						<GenericHeading level={2}>
+						<GenericHeading level={2} className="mt-4">
 							Showing {restaurants.length} delicious{' '}
 							{pluralize(restaurants.length, 'result')}
 							{!!query && (
@@ -84,7 +84,7 @@ function User() {
 								</span>
 							)}
 						</GenericHeading>
-						<div className="grid grid-cols-1 grid-flow-row-dense sm:grid-cols-2 xl:grid-cols-3 gap-8">
+						<div className="grid grid-cols-1 grid-flow-row-dense sm:grid-cols-2 xl:grid-cols-3 gap-8 mt-4">
 							{restaurants.map((restaurant) =>
 								getRestaurantDom(restaurant)
 							)}

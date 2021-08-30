@@ -8,7 +8,7 @@ function Home() {
 	return (
 		<>
 			<img
-				className="w-full h-96 object-cover"
+				className="w-full h-52 sm:h-64 md:h-96 object-cover"
 				srcSet="
 					/images/peter-dawn-sxZ_Ca6MkWM-unsplash--640.jpeg 640w,
 					/images/peter-dawn-sxZ_Ca6MkWM-unsplash--1920.jpeg 1920w"
@@ -17,8 +17,8 @@ function Home() {
 				src="/images/peter-dawn-sxZ_Ca6MkWM-unsplash--640.jpeg"
 				alt="The definitive guide to burgers"
 			/>
-			<LayoutContainer className="pt-20">
-				<GenericHeading level={1}>Burger Frontend</GenericHeading>
+			<LayoutContainer className="pt-10">
+				<GenericHeading level={1}>Burger Frontend™</GenericHeading>
 				<p>
 					The{' '}
 					<strong className="text-gradient">definitive guide</strong>{' '}

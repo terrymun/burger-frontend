@@ -10,6 +10,7 @@ import { getDayOfWeekFromNumber } from '../framework/datetime';
 
 // Component imports
 import {
+	AsleepFilled16,
 	CheckmarkOutline32,
 	FingerprintRecognition20,
 	Location20,
@@ -36,6 +37,11 @@ import {
 	getHumanReadableHoursAndMinutesFromTimestamp,
 	pluralize,
 } from '../framework/string';
+import { isRestaurantOpen } from '../helper/restaurant';
+import GenericBadge, {
+	BadgeSize,
+	BadgeType,
+} from '../components/Generic/Badge';
 
 /** @enum */
 enum ReviewPostingState {
@@ -199,7 +205,21 @@ function Restaurant() {
 										<Time20 />
 										<span>Hours</span>
 									</div>
-									<ul>{openingHours}</ul>
+									<div>
+										{!isRestaurantOpen(
+											restaurant.businessHours
+										) && (
+											<GenericBadge
+												size={BadgeSize.SMALL}
+												type={BadgeType.SLEEP}
+												className="mb-2 inline-flex gap-x-1 items-center"
+											>
+												<AsleepFilled16 />
+												Closed
+											</GenericBadge>
+										)}
+										<ul>{openingHours}</ul>
+									</div>
 
 									{/* Address */}
 									<div className="flex gap-2 items-center self-start">

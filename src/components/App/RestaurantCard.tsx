@@ -7,9 +7,10 @@ import { isRestaurantOpen } from '../../helper/restaurant';
 import { RestaurantDatum } from '../../interfaces/api';
 
 // Component imports
-import { AsleepFilled24 } from '@carbon/icons-react';
+import { AsleepFilled24, UserMultiple16 } from '@carbon/icons-react';
 import GenericHeading from '../Generic/Heading';
 import GenericRating from '../Generic/Rating';
+import GenericBadge, { BadgeSize, BadgeType } from '../Generic/Badge';
 
 /** @interface */
 interface AppRestaurantCardProps {
@@ -39,6 +40,18 @@ function AppRestaurantCard(props: AppRestaurantCardProps) {
 						alt={restaurant.description}
 						className="object-cover w-full h-full"
 					/>
+					{restaurant.averageRatingScore > 4.5 && (
+						<div className="absolute top-5 left-5">
+							<GenericBadge
+								size={BadgeSize.SMALL}
+								type={BadgeType.PRIMARY}
+								className="uppercase flex gap-x-1"
+							>
+								<UserMultiple16 />
+								Popular
+							</GenericBadge>
+						</div>
+					)}
 					{!isOpen && (
 						<div className="absolute inset-0 bg-black bg-opacity-80 flex flex-col items-center justify-center text-white font-bold transition-colors">
 							<AsleepFilled24 className="mb-2" />
