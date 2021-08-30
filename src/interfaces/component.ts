@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ChangeEventHandler, FormEventHandler, ReactNode } from "react";
 
 /**
  * A component with children (aka slottable)
@@ -14,4 +14,15 @@ export interface SlottableComponent {
  */
 export interface ClassNameInheritableComponent {
 	className: string;
+}
+
+/** @interface */
+export interface TextLikeInputComponent<InputElement extends Element> {
+	value: string;
+	onChange: ChangeEventHandler<InputElement>;
+	onInvalid?: FormEventHandler<InputElement>;
+	autocomplete?: string;
+	spellcheck?: boolean;
+	placeholder?: string;
+	required?: boolean;
 }

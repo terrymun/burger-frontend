@@ -2,6 +2,8 @@ import { Component } from 'react';
 
 // Component imports
 import AppHeader from './components/App/Header';
+
+// Component (pages) imports
 import Home from './pages/Home';
 import Discover from './pages/Discover';
 import Restaurant from './pages/Restaurant';

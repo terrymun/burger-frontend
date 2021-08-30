@@ -1,13 +1,19 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router';
+
+// API imports
 import { getBasicRestaurantsData } from '../api/restaurants';
-import AppBlankRestaurantCard from '../components/App/BlankRestaurantCard';
-import AppRestaurantCard from '../components/App/RestaurantCard';
+import { RestaurantDatum } from '../interfaces/api';
+
+// Framework imports
+import { pluralize } from '../framework/string';
+
+// Component imports
 import AppSearchForm from '../components/App/SearchForm';
 import GenericHeading from '../components/Generic/Heading';
 import LayoutContainer from '../components/Layout/Container';
-import { pluralize } from '../framework/string';
-import { BasicRestaurantDatum } from '../interfaces/api';
+import AppRestaurantCard from '../components/App/RestaurantCard';
+import AppBlankRestaurantCard from '../components/App/BlankRestaurantCard';
 
 /** @method */
 function User() {
@@ -17,7 +23,7 @@ function User() {
 		return parsedQueryString.get('q') ?? '';
 	}, [location]);
 
-	const [restaurants, setRestaurants] = useState<BasicRestaurantDatum[]>([]);
+	const [restaurants, setRestaurants] = useState<RestaurantDatum[]>([]);
 	const [isFetching, setIsFetching] = useState<boolean>(true);
 
 	useEffect(() => {
@@ -30,7 +36,7 @@ function User() {
 		});
 	}, [query]);
 
-	const getRestaurantDom = (restaurant: BasicRestaurantDatum) => {
+	const getRestaurantDom = (restaurant: RestaurantDatum) => {
 		return (
 			<AppRestaurantCard key={restaurant.name} restaurant={restaurant} />
 		);

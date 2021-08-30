@@ -1,3 +1,4 @@
+// Component imports
 import AppSearchForm from '../components/App/SearchForm';
 import GenericHeading from '../components/Generic/Heading';
 import LayoutContainer from '../components/Layout/Container';

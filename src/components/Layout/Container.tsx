@@ -1,3 +1,4 @@
+// Interfacr imports
 import { ClassNameInheritableComponent, SlottableComponent } from "../../interfaces/component";
 
 /** @interface */

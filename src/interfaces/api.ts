@@ -11,7 +11,7 @@ export interface BusinessHours {
 }
 
 /** @interface */
-export interface BasicRestaurantDatum {
+export interface RestaurantDatum {
 	id: string;
 	name: string;
 	description: string;

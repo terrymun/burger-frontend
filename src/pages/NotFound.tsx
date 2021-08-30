@@ -1,7 +1,7 @@
+// Component imports
 import LayoutContainer from '../components/Layout/Container';
 import GenericHeading from '../components/Generic/Heading';
 import AppSearchForm from '../components/App/SearchForm';
-
 
 /** @method */
 function NotFound() {

@@ -2,7 +2,7 @@
 import './Header.scss';
 
 // Router imports
-import { NavLink } from "react-router-dom";
+import { NavLink, NavLinkProps } from "react-router-dom";
 
 // Component imports
 import GenericIcon from '../Generic/Icon';
@@ -20,6 +20,7 @@ interface NavigationItem {
 	text: string;
 	icon?: CarbonIconType;
 	textClassName?: string;
+	isActive: NavLinkProps['isActive'];
 }
 
 /** @method */
@@ -37,21 +38,28 @@ function AppHeader() {
 		title: 'Home',
 		text: 'Home',
 		icon: Home24,
-		textClassName: 'hidden md:block'
+		textClassName: 'hidden md:block',
+		isActive: (match) => {
+			return !!match;
+		}
 	}, {
 		path: '/discover',
 		title: 'Discover',
 		text: 'Discover',
 		icon: LocationStar24,
+		isActive: (match, location) => {
+			return !!match || location.pathname.indexOf('/restaurant/') !== -1;
+		}
 	}];
 
-	const listItems = items.map(({ path, title, text, textClassName, icon }) => {
+	const listItems = items.map(({ path, title, text, textClassName, icon, isActive }) => {
 		return (
 			<li key={path} className="flex items-center">
 				<NavLink
 					exact
 					to={path}
 					title={title}
+					isActive={isActive}
 					activeClassName="is-active"
 					className="py-6 mr-3 md:mr-6 lg:mr-9 flex justify-center items-center gap-1 uppercase font-bold text-sm hover:text-yellow-500 dark:hover:text-yellow-300 transition-colors">
 					{!!icon && <GenericIcon name={icon} /> }

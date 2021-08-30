@@ -1,4 +1,7 @@
+// Framework imports
 import { clamp } from '../../framework/math';
+
+// Interface imports
 import { ClassNameInheritableComponent, SlottableComponent } from '../../interfaces/component';
 
 /** @interface */

@@ -1,9 +1,9 @@
 import { sleep } from "../framework/generic";
 import { haystackContainsNeedle } from "../framework/string";
-import { BasicRestaurantDatum } from "../interfaces/api";
+import { RestaurantDatum } from "../interfaces/api";
 
 /** @constant */
-const basicRestaurantsData: BasicRestaurantDatum[] = [{
+const basicRestaurantsData: RestaurantDatum[] = [{
 	id: 'gourmet-burger-kitchen',
 	name: 'Gourmet Burger Kitchen',
 	description: 'Mouth-watering burgers with an exotic touch',
@@ -25,7 +25,7 @@ const basicRestaurantsData: BasicRestaurantDatum[] = [{
 		dayRange: [0],
 		timeRange: [
 			{ hour: 11, minute: 30 },
-			{ hour: 23, minute: 55 }
+			{ hour: 21, minute: 45 }
 		]
 	}],
 	ratingCount: 1337,
@@ -47,7 +47,7 @@ const basicRestaurantsData: BasicRestaurantDatum[] = [{
 		dayRange: [6],
 		timeRange: [
 			{ hour: 10, minute: 30 },
-			{ hour: 20, minute: 0 }
+			{ hour: 20, minute: 30 }
 		]
 	}, {
 		dayRange: [0],
@@ -75,7 +75,7 @@ const basicRestaurantsData: BasicRestaurantDatum[] = [{
 		dayRange: [6],
 		timeRange: [
 			{ hour: 10, minute: 30 },
-			{ hour: 20, minute: 0 }
+			{ hour: 20, minute: 30 }
 		]
 	}, {
 		dayRange: [0],
@@ -103,12 +103,12 @@ const basicRestaurantsData: BasicRestaurantDatum[] = [{
 		dayRange: [6],
 		timeRange: [
 			{ hour: 10, minute: 30 },
-			{ hour: 20, minute: 0 }
+			{ hour: 20, minute: 30 }
 		]
 	}, {
 		dayRange: [0],
 		timeRange: [
-			{ hour: 10, minute: 30 },
+			{ hour: 11, minute: 0 },
 			{ hour: 20, minute: 0 }
 		]
 	}],
@@ -131,12 +131,12 @@ const basicRestaurantsData: BasicRestaurantDatum[] = [{
 		dayRange: [6],
 		timeRange: [
 			{ hour: 10, minute: 30 },
-			{ hour: 20, minute: 0 }
+			{ hour: 20, minute: 30 }
 		]
 	}, {
 		dayRange: [0],
 		timeRange: [
-			{ hour: 10, minute: 30 },
+			{ hour: 11, minute: 30 },
 			{ hour: 20, minute: 0 }
 		]
 	}],
@@ -146,10 +146,10 @@ const basicRestaurantsData: BasicRestaurantDatum[] = [{
 }];
 
 /** @method */
-export async function getBasicRestaurantsData(query: string = ''): Promise<BasicRestaurantDatum[]> {
+export async function getBasicRestaurantsData(query: string = ''): Promise<RestaurantDatum[]> {
 	const filteredData = basicRestaurantsData.filter(entry => {
 		if (!query) {
-			return false;
+			return true;
 		}
 
 		return [
@@ -161,4 +161,16 @@ export async function getBasicRestaurantsData(query: string = ''): Promise<Basic
 	await sleep(1500);
 
 	return filteredData;
+}
+
+/** @method */
+export async function getRestaurant(id: string): Promise<RestaurantDatum> {
+	try {
+		const foundRestaurant = basicRestaurantsData.find(entry => entry.id === id);
+		if (!foundRestaurant) throw new Error(`Restaurant with the ID ${id} cannot be found`);
+		await sleep(1500);
+		return foundRestaurant;
+	} catch(e) {
+		throw e;
+	}
 }

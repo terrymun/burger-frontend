@@ -1,3 +1,4 @@
+// Interfacre imports
 import { SlottableComponent } from "../../interfaces/component";
 
 /** @enum */
@@ -10,6 +11,7 @@ export enum ButtonRole {
 interface GenericButtonProps extends SlottableComponent {
 	type?: 'button' | 'submit';
 	role?: ButtonRole;
+	disabled?: boolean;
 }
 
 /** @method */
@@ -17,10 +19,10 @@ function GenericButton(props: GenericButtonProps) {
 	const type = props.type ?? 'button';
 	const role = props.role ?? ButtonRole.SECONDARY;
 
-	const buttonColorClassNames = 'flex items-center gap-2 rounded-md px-4 py-2 border-0 focus:outline-none focus:ring-2'.split(' ');
+	const buttonColorClassNames = 'flex items-center gap-2 rounded-md px-4 py-2 border-0 focus:outline-none focus:ring-2 disabled:opacity-50'.split(' ');
 	switch (role) {
 		case ButtonRole.PRIMARY:
-			buttonColorClassNames.push('bg-green-500', 'text-white', 'focus:ring-green-500', 'focus:ring-opacity-25');
+			buttonColorClassNames.push('bg-yellow-500', 'text-white', 'focus:ring-yellow-500', 'focus:ring-opacity-25');
 			break;
 
 		case ButtonRole.SECONDARY:
@@ -30,7 +32,7 @@ function GenericButton(props: GenericButtonProps) {
 	}
 
 	return (
-		<button type={type} className={buttonColorClassNames.join(' ')}>
+		<button type={type} className={buttonColorClassNames.join(' ')} disabled={props.disabled}>
 			{props.children}
 		</button>
 	);

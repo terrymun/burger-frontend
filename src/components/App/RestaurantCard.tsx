@@ -1,13 +1,19 @@
-import { AsleepFilled24 } from "@carbon/icons-react";
 import { Link } from "react-router-dom";
+
+// Helper imports
 import { isRestaurantOpen } from "../../helper/restaurant";
-import { BasicRestaurantDatum } from "../../interfaces/api";
+
+// API imports
+import { RestaurantDatum } from "../../interfaces/api";
+
+// Component imports
+import { AsleepFilled24 } from "@carbon/icons-react";
 import GenericHeading from "../Generic/Heading";
 import GenericRating from "../Generic/Rating";
 
 /** @interface */
 interface AppRestaurantCardProps {
-	restaurant: BasicRestaurantDatum;
+	restaurant: RestaurantDatum;
 }
 
 /** @method */
