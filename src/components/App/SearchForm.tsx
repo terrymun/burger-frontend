@@ -32,6 +32,7 @@ function AppSearchForm(props: AppSearchFormProps) {
 					placeholder="Search for burgers"
 					value={query}
 					onChange={(e) => setQuery(e.target.value)}
+					autofocus={true}
 				/>
 				<GenericButton role={searchButtonRole} type="submit">
 					<Search24 />

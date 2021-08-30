@@ -40,6 +40,7 @@ function GenericInputText(props: GenericInputTextProps) {
 				spellCheck={props.spellcheck}
 				placeholder={props.placeholder}
 				required={props.required}
+				autoFocus={props.autofocus}
 				onChange={onChange}
 				onInvalid={onInvalid}
 			/>

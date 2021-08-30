@@ -21,6 +21,7 @@ export interface TextLikeInputComponent<InputElement extends Element> {
 	value: string;
 	onChange: ChangeEventHandler<InputElement>;
 	onInvalid?: FormEventHandler<InputElement>;
+	autofocus?: boolean;
 	autocomplete?: string;
 	spellcheck?: boolean;
 	placeholder?: string;
