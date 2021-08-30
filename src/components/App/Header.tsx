@@ -32,8 +32,17 @@ interface NavigationItem {
 
 /** @method */
 function AppHeader() {
-	const [shouldUseDarkTheme, setShouldUseDarkTheme] = useState(false);
+	const [shouldUseDarkTheme, setShouldUseDarkTheme] = useState(
+		window.localStorage.getItem('hasUserManuallyToggledDarkTheme') !== null
+			? window.localStorage.getItem('hasUserManuallyToggledDarkTheme') ===
+					'true'
+			: window.matchMedia('(prefers-color-scheme: dark)').matches
+	);
 	const toggleDarkTheme = () => {
+		window.localStorage.setItem(
+			'hasUserManuallyToggledDarkTheme',
+			!shouldUseDarkTheme ? 'true' : 'false'
+		);
 		setShouldUseDarkTheme(!shouldUseDarkTheme);
 	};
 	useEffect(() => {
