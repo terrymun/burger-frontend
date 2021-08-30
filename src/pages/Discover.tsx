@@ -73,7 +73,7 @@ function User() {
 					<>
 						<GenericHeading level={2} className="mt-4">
 							Showing {restaurants.length} delicious{' '}
-							{pluralize(restaurants.length, 'result')}
+							{pluralize(restaurants.length, 'result')}{' '}
 							{!!query && (
 								<span>
 									for &ldquo;
