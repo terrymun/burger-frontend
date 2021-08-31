@@ -102,6 +102,7 @@ function AppHeader() {
 						<NavLink
 							exact
 							to="/user"
+							activeClassName="is-active"
 							className="py-6 flex justify-center items-center gap-1 text-sm hover:text-yellow-500 dark:hover:text-yellow-300 transition-colors"
 						>
 							<UserAvatarFilled24 />
