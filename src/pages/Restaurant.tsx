@@ -143,29 +143,34 @@ function Restaurant() {
 		<article>
 			<header>
 				{isFetching ? (
-					<div className="h-96 relative flex flex-col items-center justify-center text-white">
-						<div className="w-full h-full absolute inset-0 bg-gray-800 animate-pulse"></div>
+					<div className="h-80 relative flex flex-col items-center justify-center text-gray-800 dark:text-gray-100 transition-colors">
+						<div className="w-full h-full absolute inset-0 bg-gray-100 dark:bg-gray-800 animate-pulse transition-colors"></div>
 						<ProgressBarRound32 className="w-12 h-12 animate-spin relative" />
-						<p className="text-white relative">
+						<p className="relative">
 							Loading restaurant data&hellip;
 						</p>
 					</div>
 				) : (
-					<div className="h-96 relative bg-gray-800">
+					<div className="h-80 relative bg-gray-100 dark:bg-gray-800 transition-colors">
 						{!!restaurant && (
 							<>
 								<img
-									className="absolute w-full h-full object-cover opacity-50"
+									className="absolute w-full h-full object-cover opacity-25"
 									src={restaurant.image}
 									alt={restaurant.name}
 									title={restaurant.name}
 								/>
-								<div className="absolute w-full h-full flex flex-col items-center justify-center text-white">
+								<LayoutContainer
+									className="h-full relative flex flex-col items-center justify-center text-gray-800 dark:text-gray-100 transition-colors"
+									tag="section"
+								>
 									<GenericHeading level={1}>
 										{restaurant.name}
 									</GenericHeading>
-									<p>{restaurant.description}</p>
-								</div>
+									<p className="mt-0">
+										{restaurant.description}
+									</p>
+								</LayoutContainer>
 							</>
 						)}
 					</div>
@@ -175,8 +180,8 @@ function Restaurant() {
 				<>
 					<LayoutContainer tag="section" className="py-12">
 						<div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-16">
-							<div className="rounded-md h-64 animate-pulse bg-gray-200 dark:bg-gray-600"></div>
-							<div className="hidden lg:block rounded-md col-span-2 h-64 animate-pulse bg-gray-200 dark:bg-gray-600"></div>
+							<div className="rounded-md h-64 animate-pulse bg-gray-200 dark:bg-gray-600 transition-colors"></div>
+							<div className="hidden lg:block rounded-md col-span-2 h-64 animate-pulse bg-gray-200 dark:bg-gray-600 transition-colors"></div>
 						</div>
 					</LayoutContainer>
 				</>
