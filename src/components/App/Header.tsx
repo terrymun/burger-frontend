@@ -105,7 +105,12 @@ function AppHeader() {
 							className="py-6 flex justify-center items-center gap-1 text-sm hover:text-yellow-500 dark:hover:text-yellow-300 transition-colors"
 						>
 							<UserAvatarFilled24 />
-							Hello, <strong>{userData.firstName}</strong>
+							<span>
+								<span className="hidden sm:inline-block">
+									Hello,{' '}
+								</span>
+								<strong>{userData.firstName}</strong>
+							</span>
 						</NavLink>
 					</li>
 					<li className="flex items-center">
@@ -114,7 +119,7 @@ function AppHeader() {
 								bg-yellow-500 text-gray-800 dark:bg-purple-800 dark:text-gray-100
 								focus:ring-yellow-500 dark:focus:ring-purple-600
 								border-0 focus:outline-none focus:ring-2 focus:ring-opacity-25"
-							title="Toggle dark theme"
+							title="Toggle light/dark theme"
 							onClick={toggleDarkTheme}
 						>
 							{!shouldUseDarkTheme && <LightFilled16 />}

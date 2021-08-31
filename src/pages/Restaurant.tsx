@@ -12,12 +12,12 @@ import { getDayOfWeekFromNumber } from '../framework/datetime';
 import {
 	AsleepFilled16,
 	CheckmarkOutline32,
-	FingerprintRecognition20,
+	Touch_120,
 	Location20,
 	LocationStar24,
 	Phone20,
 	ProgressBarRound32,
-	Sight20,
+	View20,
 	StarReview20,
 	Taste20,
 	Time20,
@@ -109,9 +109,7 @@ function Restaurant() {
 
 	const [reviewPostingState, setReviewPostingState] =
 		useState<ReviewPostingState>(ReviewPostingState.NONE);
-	const submitReview = async (e: FormEvent): Promise<void> => {
-		e.preventDefault();
-
+	const submitReview = async (): Promise<void> => {
 		const isFormValid = formElement.current?.checkValidity() ?? false;
 		const _isReviewValid =
 			isFormValid &&
@@ -333,7 +331,8 @@ function Restaurant() {
 															e.target.value
 														)
 													}
-													placeholder="An attention-grabbing title"
+													placeholder="An optional but attention-grabbing title"
+													required={true}
 												/>
 											</GenericFormControlGroup>
 											<GenericFormControlGroup label="Experience">
@@ -353,7 +352,7 @@ function Restaurant() {
 										<GenericFormFieldset legend="The Burger">
 											<div className="block lg:flex lg:justify-between">
 												<label className="flex lg:flex-col">
-													<div className="py-2 cursor-pointer flex-grow lg:order-2 flex gap-1 items-center justify-end lg:justify-center mr-3 lg:mr-0">
+													<div className="py-2 cursor-pointer flex-grow lg:order-2 flex gap-1 items-center justify-start lg:justify-center mr-3 lg:mr-0">
 														<Taste20 />
 														Taste
 													</div>
@@ -371,8 +370,8 @@ function Restaurant() {
 													/>
 												</label>
 												<label className="flex lg:flex-col">
-													<div className="py-2 cursor-pointer flex-grow lg:order-2 flex gap-1 items-center justify-end lg:justify-center mr-3 lg:mr-0">
-														<FingerprintRecognition20 />
+													<div className="py-2 cursor-pointer flex-grow lg:order-2 flex gap-1 items-center justify-start lg:justify-center mr-3 lg:mr-0">
+														<Touch_120 />
 														Texture
 													</div>
 													<GenericInputRating
@@ -389,8 +388,8 @@ function Restaurant() {
 													/>
 												</label>
 												<label className="flex lg:flex-col">
-													<div className="py-2 cursor-pointer flex-grow lg:order-2 flex gap-1 items-center justify-end lg:justify-center mr-3 lg:mr-0">
-														<Sight20 />
+													<div className="py-2 cursor-pointer flex-grow lg:order-2 flex gap-1 items-center justify-start lg:justify-center mr-3 lg:mr-0">
+														<View20 />
 														Presentation
 													</div>
 													<GenericInputRating
@@ -435,7 +434,8 @@ function Restaurant() {
 										<div className="mt-3">
 											<GenericButton
 												role={ButtonRole.PRIMARY}
-												type="submit"
+												type="button"
+												onClick={submitReview}
 											>
 												Submit
 											</GenericButton>

@@ -1,4 +1,5 @@
 // Interfacre imports
+import { MouseEventHandler } from 'react';
 import { SlottableComponent } from '../../interfaces/component';
 
 /** @enum */
@@ -12,6 +13,7 @@ interface GenericButtonProps extends SlottableComponent {
 	type?: 'button' | 'submit';
 	role?: ButtonRole;
 	disabled?: boolean;
+	onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
 /** @method */
@@ -44,6 +46,7 @@ function GenericButton(props: GenericButtonProps) {
 			type={type}
 			className={buttonColorClassNames.join(' ')}
 			disabled={props.disabled}
+			onClick={props.onClick}
 		>
 			{props.children}
 		</button>
