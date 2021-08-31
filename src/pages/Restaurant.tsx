@@ -15,6 +15,7 @@ import {
 	FingerprintRecognition20,
 	Location20,
 	LocationStar24,
+	Phone20,
 	ProgressBarRound32,
 	Sight20,
 	StarReview20,
@@ -237,7 +238,28 @@ function Restaurant() {
 										<Location20 />
 										<span>Address</span>
 									</div>
-									<span>{restaurant.address}</span>
+									<a
+										className="underline"
+										target="_blank"
+										rel="noreferrer"
+										href={`https://www.google.com/maps/place/${encodeURIComponent(
+											restaurant.address
+										)}/`}
+									>
+										{restaurant.address}
+									</a>
+
+									{/* Phone */}
+									<div className="flex gap-2 items-center self-start">
+										<Phone20 />
+										<span>Phone</span>
+									</div>
+									<a
+										className="underline"
+										href={`tel:${restaurant.phone}/`}
+									>
+										{restaurant.phone}
+									</a>
 								</div>
 							</aside>
 

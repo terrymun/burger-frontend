@@ -17,6 +17,7 @@ export interface RestaurantDatum {
 	description: string;
 	businessHours: BusinessHours[];
 	address: string;
+	phone: string;
 	coordinates: [number, number];
 	ratingCount: number;
 	averageRatingScore: number;

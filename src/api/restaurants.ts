@@ -9,6 +9,7 @@ const basicRestaurantsData: RestaurantDatum[] = [
 		name: 'Gourmet Burger Kitchen',
 		description: 'Mouth-watering burgers with an exotic touch',
 		address: 'Paradisgade 10, 8000 Aarhus, Denmark',
+		phone: '+45 50 50 14 14',
 		coordinates: [10.209614542314284, 56.16040213991721],
 		businessHours: [
 			{
@@ -42,6 +43,7 @@ const basicRestaurantsData: RestaurantDatum[] = [
 		name: 'Burger Bandits',
 		description: 'Wallet-friendly budgets served with passion',
 		address: 'Gammel Munkegade 1, 8000 Aarhus, Denmark',
+		phone: '+45 50 50 14 14',
 		coordinates: [10.204117728842334, 56.15894501260095],
 		businessHours: [
 			{
@@ -75,6 +77,7 @@ const basicRestaurantsData: RestaurantDatum[] = [
 		name: 'Cafe Atrix',
 		description: 'American cuisine served with a French twist',
 		address: 'Vestergade 46, 8000 Aarhus, Denmark',
+		phone: '+45 50 50 14 14',
 		coordinates: [10.202368928457076, 56.1575767610488],
 		businessHours: [
 			{
@@ -108,6 +111,7 @@ const basicRestaurantsData: RestaurantDatum[] = [
 		name: 'Saint Bernaise',
 		description: 'Burger meets haute cuisine',
 		address: 'Rosensgade 12, 8000 Aarhus, Denmark',
+		phone: '+45 50 50 14 14',
 		coordinates: [10.211312908232458, 56.15760809936657],
 		businessHours: [
 			{
@@ -141,6 +145,7 @@ const basicRestaurantsData: RestaurantDatum[] = [
 		name: 'Golden Horn Bistro',
 		description: 'Bespoke burger crafted by artisan chefs',
 		address: 'Åboulevarden 70, 8000 Aarhus, Denmark',
+		phone: '+45 50 50 14 14',
 		coordinates: [10.205659839042028, 56.15662517509338],
 		businessHours: [
 			{
