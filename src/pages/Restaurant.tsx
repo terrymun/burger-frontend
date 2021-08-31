@@ -42,6 +42,7 @@ import GenericBadge, {
 	BadgeSize,
 	BadgeType,
 } from '../components/Generic/Badge';
+import GenericFormErrorMessage from '../components/Generic/FormErrorMessage';
 
 /** @enum */
 enum ReviewPostingState {
@@ -103,27 +104,21 @@ function Restaurant() {
 	const [textureRating, setTextureRating] = useState<number>(0);
 	const [presentationRating, setPresentationRating] = useState<number>(0);
 	const [imageFiles, setImageFiles] = useState<File[]>([]);
-	const [isReviewValid, setIsReviewValid] = useState<boolean>(false);
-	useEffect(() => {
-		const isFormValid = formElement.current?.checkValidity() ?? false;
-		setIsReviewValid(
-			isFormValid &&
-				tasteRating > 0 &&
-				textureRating > 0 &&
-				presentationRating > 0
-		);
-	}, [
-		reviewTitle,
-		reviewBody,
-		tasteRating,
-		textureRating,
-		presentationRating,
-	]);
+	const [isReviewValid, setIsReviewValid] = useState<boolean>(true);
 
 	const [reviewPostingState, setReviewPostingState] =
 		useState<ReviewPostingState>(ReviewPostingState.NONE);
 	const submitReview = async (e: FormEvent): Promise<void> => {
 		e.preventDefault();
+
+		const isFormValid = formElement.current?.checkValidity() ?? false;
+		const _isReviewValid =
+			isFormValid &&
+			tasteRating > 0 &&
+			textureRating > 0 &&
+			presentationRating > 0;
+		setIsReviewValid(_isReviewValid);
+		if (!_isReviewValid) return;
 
 		// NOTE: A form data object can be constructed from this and dispatched to our endpoint
 		console.info({
@@ -329,7 +324,7 @@ function Restaurant() {
 										</GenericFormFieldset>
 
 										<GenericFormFieldset legend="The Burger">
-											<div className="block lg:flex lg:justify-between mb-6">
+											<div className="block lg:flex lg:justify-between">
 												<label className="flex lg:flex-col">
 													<div className="py-2 cursor-pointer flex-grow lg:order-2 flex gap-1 items-center justify-end lg:justify-center mr-3 lg:mr-0">
 														<Taste20 />
@@ -387,19 +382,32 @@ function Restaurant() {
 													/>
 												</label>
 											</div>
-											<GenericFormControlGroup label="Photo(s)">
-												<GenericInputFile
-													accept="image/*"
-													onChange={(e) =>
-														setImageFiles(e)
-													}
-												/>
-											</GenericFormControlGroup>
+											{!isReviewValid &&
+												(!tasteRating ||
+													!textureRating ||
+													!presentationRating) && (
+													<div className="flex justify-center">
+														<GenericFormErrorMessage>
+															Please select a
+															rating for all
+															categories
+														</GenericFormErrorMessage>
+													</div>
+												)}
+											<div className="mt-6">
+												<GenericFormControlGroup label="Photo(s)">
+													<GenericInputFile
+														accept="image/*"
+														onChange={(e) =>
+															setImageFiles(e)
+														}
+													/>
+												</GenericFormControlGroup>
+											</div>
 										</GenericFormFieldset>
 										<div className="mt-3">
 											<GenericButton
 												role={ButtonRole.PRIMARY}
-												disabled={!isReviewValid}
 												type="submit"
 											>
 												Submit

@@ -1,7 +1,10 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useMemo, useState } from 'react';
 
 // Interface imports
 import { TextLikeInputComponent } from '../../interfaces/component';
+
+// Helper imports
+import { getBaseInputClasses } from '../../helper/input';
 
 // Component imports
 import GenericFormErrorMessage from './FormErrorMessage';
@@ -25,15 +28,14 @@ function GenericTextarea(props: GenericTextareaProps) {
 		props.onInvalid && props.onInvalid(e);
 	};
 
+	const classNames = useMemo(() => {
+		return getBaseInputClasses(!!errorMessage, ['resize-y']);
+	}, [errorMessage]);
+
 	return (
 		<>
 			<textarea
-				className="
-					block rounded-md px-4 py-2 bg-opacity-40 border-0 outline-none w-full transition-all resize-y
-					bg-gray-300 focus:ring-2 focus:ring-gray-700 focus:ring-opacity-60
-					dark:bg-gray-500 dark:focus:ring-gray-300
-					invalid:ring-red-500 invalid:bg-red-100 invalid:text-red-500
-					dark:invalid:ring-red-200 dark:invalid:bg-red-300 dark:invalid:text-red-700"
+				className={classNames.join(' ')}
 				rows={props.rows ?? 4}
 				value={props.value}
 				autoComplete={props.autocomplete ?? 'off'}
