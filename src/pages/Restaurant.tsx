@@ -1,5 +1,5 @@
 import { useHistory, useParams } from 'react-router';
-import { FormEvent, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 // API imports
 import { RestaurantDatum } from '../interfaces/api';
@@ -12,7 +12,7 @@ import { getDayOfWeekFromNumber } from '../framework/datetime';
 import {
 	AsleepFilled16,
 	CheckmarkOutline32,
-	Touch_120,
+	FingerprintRecognition20,
 	Location20,
 	LocationStar24,
 	Phone20,
@@ -371,7 +371,7 @@ function Restaurant() {
 												</label>
 												<label className="flex lg:flex-col">
 													<div className="py-2 cursor-pointer flex-grow lg:order-2 flex gap-1 items-center justify-start lg:justify-center mr-3 lg:mr-0">
-														<Touch_120 />
+														<FingerprintRecognition20 />
 														Texture
 													</div>
 													<GenericInputRating
