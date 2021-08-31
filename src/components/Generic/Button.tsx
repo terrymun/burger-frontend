@@ -20,7 +20,7 @@ function GenericButton(props: GenericButtonProps) {
 	const role = props.role ?? ButtonRole.SECONDARY;
 
 	const buttonColorClassNames =
-		'flex items-center gap-2 rounded-md px-4 py-2 border-0 focus:outline-none focus:ring-2 disabled:opacity-50'.split(
+		'flex items-center gap-2 rounded-md px-4 py-2 border-0 focus:outline-none focus:ring-2 disabled:opacity-50 select-none'.split(
 			' '
 		);
 	switch (role) {

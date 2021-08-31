@@ -178,9 +178,9 @@ function Restaurant() {
 			{isFetching && (
 				<>
 					<LayoutContainer tag="section" className="py-12">
-						<div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
+						<div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-16">
 							<div className="rounded-md h-64 animate-pulse bg-gray-200 dark:bg-gray-600"></div>
-							<div className="rounded-md col-span-2 h-64 animate-pulse bg-gray-200 dark:bg-gray-600"></div>
+							<div className="hidden lg:block rounded-md col-span-2 h-64 animate-pulse bg-gray-200 dark:bg-gray-600"></div>
 						</div>
 					</LayoutContainer>
 				</>
