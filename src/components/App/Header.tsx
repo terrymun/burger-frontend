@@ -103,12 +103,12 @@ function AppHeader() {
 							exact
 							to="/user"
 							activeClassName="is-active"
-							className="py-6 flex justify-center items-center gap-1 text-sm hover:text-yellow-500 dark:hover:text-yellow-300 transition-colors"
+							className="py-6 flex justify-center items-center gap-1 text-sm md:text-base hover:text-yellow-500 dark:hover:text-yellow-300 transition-colors"
 						>
 							<UserAvatarFilled24 />
 							<span>
 								<span className="hidden sm:inline-block">
-									Hello,{' '}
+									Hello,&nbsp;
 								</span>
 								<strong>{userData.firstName}</strong>
 							</span>

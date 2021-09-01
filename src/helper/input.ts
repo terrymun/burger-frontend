@@ -14,6 +14,7 @@ export function getBaseInputClasses(
 		'w-full',
 		'transition-all',
 		'focus:ring-opacity-60',
+		'dark:placeholder-gray-100',
 		...additionalClasses,
 	];
 
@@ -22,9 +23,11 @@ export function getBaseInputClasses(
 			'ring-red-500',
 			'bg-red-100',
 			'text-red-500',
+			'placeholder-red-500',
 			'dark:ring-red-200',
 			'dark:bg-red-300',
-			'dark:text-red-700'
+			'dark:text-red-700',
+			'dark:placeholder-red-700'
 		);
 	} else {
 		classes.push(

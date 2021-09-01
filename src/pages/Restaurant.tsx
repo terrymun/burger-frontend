@@ -84,7 +84,7 @@ function Restaurant() {
 						)}
 					</span>
 
-					<span className="text-gray-500">
+					<span className="text-gray-500 dark:text-gray-400">
 						{getHumanReadableHoursAndMinutesFromTimestamp(
 							timeRange[0]
 						)}
@@ -183,8 +183,8 @@ function Restaurant() {
 				<>
 					<LayoutContainer tag="section" className="py-12">
 						<div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-16">
-							<div className="rounded-md h-64 animate-pulse bg-gray-200 dark:bg-gray-600 transition-colors"></div>
-							<div className="hidden lg:block rounded-md col-span-2 h-64 animate-pulse bg-gray-200 dark:bg-gray-600 transition-colors"></div>
+							<div className="rounded-md h-64 animate-pulse bg-gray-400 transition-colors"></div>
+							<div className="hidden lg:block rounded-md col-span-2 h-64 animate-pulse bg-gray-400 transition-colors"></div>
 						</div>
 					</LayoutContainer>
 				</>
@@ -211,7 +211,7 @@ function Restaurant() {
 												restaurant.averageRatingScore
 											}
 										/>
-										<span className="text-gray-500 text-sm">
+										<span className="text-gray-500 dark:text-gray-400 text-sm">
 											{restaurant.ratingCount}{' '}
 											{pluralize(
 												restaurant.ratingCount,
@@ -336,7 +336,7 @@ function Restaurant() {
 															e.target.value
 														)
 													}
-													placeholder="An optional but attention-grabbing title"
+													placeholder="An attention-grabbing title"
 													required={true}
 												/>
 											</GenericFormControlGroup>
