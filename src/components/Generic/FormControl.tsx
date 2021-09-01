@@ -31,7 +31,7 @@ function GenericFormControlGroup(props: GenericFormControlGroupProps) {
 		<div className="mb-4 block lg:flex lg:gap-x-3">
 			<label
 				htmlFor={id}
-				className="py-2 lg:flex-grow-0 lg:w-48 lg:text-right cursor-pointer"
+				className="block py-2 lg:flex-grow-0 lg:w-48 lg:text-right cursor-pointer"
 			>
 				{props.label}
 			</label>
