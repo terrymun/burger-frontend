@@ -1,18 +1,29 @@
-import { Close24, DropPhoto32 } from '@carbon/icons-react';
+import { DropPhoto32 } from '@carbon/icons-react';
 import { ChangeEvent, ReactNode, useEffect, useState } from 'react';
+import { pluralize } from '../../framework/string';
+import GenericFileUploadEntry from './FileUploadEntry';
 
 /** @interface */
 interface GenericInputFileProps {
 	onChange?: (payload: File[]) => void;
 	accept?: string;
+	multiple?: boolean;
 }
 
 /** @method */
 function GenericInputFile(props: GenericInputFileProps) {
 	const [files, setFiles] = useState<File[]>([]);
 	const onChange = (e: ChangeEvent<HTMLInputElement>): void => {
-		if (e.target.files && e.target.files[0])
-			setFiles((currentFiles) => [...currentFiles, e.target.files![0]]);
+		if (!e.target.files || !e.target.files[0]) return;
+
+		if (props.multiple) {
+			setFiles((currentFiles) => [
+				...currentFiles,
+				...Array.from(e.target.files!),
+			]);
+		} else {
+			setFiles(() => [e.target.files![0]]);
+		}
 	};
 
 	const [imagesDom, setImagesDom] = useState<ReactNode>();
@@ -25,32 +36,12 @@ function GenericInputFile(props: GenericInputFileProps) {
 		};
 
 		const dom = Array.from(files).map((file, i) => {
-			const src = URL.createObjectURL(file);
 			return (
-				<li
-					key={i}
-					className="
-            flex gap-x-3 h-16 items-center overflow-hidden rounded-md hover:shadow-md bg-opacity-40 transition-all
-            bg-gray-300	dark:bg-gray-500
-          "
-				>
-					<img
-						src={src}
-						alt={file.name}
-						title={file.name}
-						className="block h-full w-auto"
+				<li key={i} className="block">
+					<GenericFileUploadEntry
+						file={file}
+						onCancel={() => removeFile(i)}
 					/>
-					<div className="font-monospace text-xs flex-grow">
-						{file.name}
-					</div>
-					<button
-						type="button"
-						onClick={() => removeFile(i)}
-						title={`Delete image ${file.name}`}
-						className="w-16 h-16 flex items-center justify-center hover:text-red-500 dark:hover:text-red-300 transition-colors"
-					>
-						<Close24 />
-					</button>
 				</li>
 			);
 		});
@@ -70,16 +61,23 @@ function GenericInputFile(props: GenericInputFileProps) {
 			"
 			>
 				<DropPhoto32 className="w-10 h-10" />
-				Drop or select image to upload
+				Drop or select{' '}
+				{pluralize(props.multiple ? 2 : 1, 'an image', 'image(s)')} to
+				upload
 				<input
 					className="absolute top-0 left-0 opacity-0 w-full h-full"
 					type="file"
 					accept={props.accept ?? ''}
+					multiple={props.multiple}
 					onChange={onChange}
 				/>
 			</div>
 			{!!imagesDom && (
-				<ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
+				<ul
+					className={`grid grid-cols-1${
+						props.multiple || 'md:grid-cols-2 gap-3'
+					}`}
+				>
 					{imagesDom}
 				</ul>
 			)}
