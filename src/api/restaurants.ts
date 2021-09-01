@@ -191,7 +191,7 @@ export async function getBasicRestaurantsData(
 		].some(Boolean);
 	});
 
-	await sleep(1500);
+	await sleep(1000);
 
 	return filteredData;
 }
@@ -204,7 +204,7 @@ export async function getRestaurant(id: string): Promise<RestaurantDatum> {
 		);
 		if (!foundRestaurant)
 			throw new Error(`Restaurant with the ID ${id} cannot be found`);
-		await sleep(1500);
+		await sleep(1000);
 		return foundRestaurant;
 	} catch (e) {
 		throw e;

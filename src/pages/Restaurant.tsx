@@ -111,6 +111,11 @@ function Restaurant() {
 		useState<ReviewPostingState>(ReviewPostingState.NONE);
 	const submitReview = async (): Promise<void> => {
 		const isFormValid = formElement.current?.checkValidity() ?? false;
+
+		/*
+		 * NOTE: Since the rating use `<input type="range">`, they will never throw an error
+		 * Therefore we also need to check if a user has given a non-zero rating
+		 */
 		const _isReviewValid =
 			isFormValid &&
 			tasteRating > 0 &&
