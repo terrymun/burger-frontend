@@ -2,6 +2,8 @@
 
 Burger Frontend 1.0™ is a React app written in TypeScript as a proof-of-concept demo. Open the `burger-frontend.code-workspace` file using VS Code for the best editing experience.
 
+[Visit site](https://burger-frontend.netlify.app).
+
 By [Terry Mun](http://terrymun.com).
 
 ## How to get it up and running?
