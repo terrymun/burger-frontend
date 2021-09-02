@@ -336,29 +336,6 @@ function Restaurant() {
 								</div>
 							</aside>
 
-							{reviewPostingState ===
-								ReviewPostingState.ALREADY_DONE && (
-								<div className="lg:col-span-2">
-									<GenericHeading level={2}>
-										Thanks for sharing!
-									</GenericHeading>
-									<p>
-										Your review will be available shortly.
-										While you wait, do you want to check out
-										other burger joints in town?
-									</p>
-									<Link
-										className="
-										inline-flex items-center gap-1 rounded-md px-4 py-2 border-0 focus:outline-none focus:ring-2
-										bg-yellow-500 text-white focus:ring-yellow-500 focus:ring-opacity-25
-										"
-										to="/discover"
-									>
-										<LocationStar24 />
-										Yes please!
-									</Link>
-								</div>
-							)}
 							<div className="lg:col-span-2">
 								<GenericHeading level={2} id="reviews">
 									What others are saying
@@ -367,6 +344,31 @@ function Restaurant() {
 								<ul className="mb-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-x-8">
 									{reviewsDom}
 								</ul>
+
+								{reviewPostingState ===
+									ReviewPostingState.ALREADY_DONE && (
+									<>
+										<GenericHeading level={2}>
+											Thanks for sharing!
+										</GenericHeading>
+										<p>
+											Your review will be available
+											shortly. While you wait, do you want
+											to check out other burger joints in
+											town?
+										</p>
+										<Link
+											className="
+											inline-flex items-center gap-1 rounded-md px-4 py-2 border-0 focus:outline-none focus:ring-2
+											bg-yellow-500 text-white focus:ring-yellow-500 focus:ring-opacity-25
+											"
+											to="/discover"
+										>
+											<LocationStar24 />
+											Yes please!
+										</Link>
+									</>
+								)}
 
 								{reviewPostingState !==
 									ReviewPostingState.ALREADY_DONE && (
