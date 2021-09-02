@@ -16,7 +16,7 @@ function AppSearchForm(props: AppSearchFormProps) {
 	const [query, setQuery] = useState(props.query ?? '');
 
 	const history = useHistory();
-	const submit = (e: FormEvent) => {
+	const submit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		history.push({
 			pathname: '/discover',

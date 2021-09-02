@@ -78,10 +78,7 @@ function GenericRating(prop: GenericRatingProp) {
 	));
 
 	return (
-		<div
-			className="flex gap-x-0.5 w-min"
-			title={`Average rating: ${score}`}
-		>
+		<div className="flex gap-x-0.5 w-min" title={`Rating: ${score}`}>
 			{filledStars}
 			{halfStars}
 			{emptyStars}

@@ -1,12 +1,19 @@
 import { useHistory, useParams } from 'react-router';
-import { useEffect, useRef, useState } from 'react';
+import { FormEvent, useEffect, useMemo, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 // API imports
-import { RestaurantDatum } from '../interfaces/api';
+import { RestaurantDatum, RestaurantReview } from '../interfaces/api';
 import { getRestaurant } from '../api/restaurants';
 
-// Framework imports
+// Framework and helper imports
+import { sleep } from '../framework/generic';
 import { getDayOfWeekFromNumber } from '../framework/datetime';
+import {
+	getHumanReadableHoursAndMinutesFromTimestamp,
+	pluralize,
+} from '../framework/string';
+import { isRestaurantOpen } from '../helper/restaurant';
 
 // Component imports
 import {
@@ -32,18 +39,12 @@ import GenericFormFieldset from '../components/Generic/FormFieldset';
 import GenericInputRating from '../components/Generic/InputRating';
 import GenericRating, { RatingIconSize } from '../components/Generic/Rating';
 import GenericInputFile from '../components/Generic/InputFile';
-import { sleep } from '../framework/generic';
-import { Link } from 'react-router-dom';
-import {
-	getHumanReadableHoursAndMinutesFromTimestamp,
-	pluralize,
-} from '../framework/string';
-import { isRestaurantOpen } from '../helper/restaurant';
 import GenericBadge, {
 	BadgeSize,
 	BadgeType,
 } from '../components/Generic/Badge';
 import GenericFormErrorMessage from '../components/Generic/FormErrorMessage';
+import AppReviewCard, { GroupedBy } from '../components/App/ReviewCard';
 
 /** @enum */
 enum ReviewPostingState {
@@ -62,11 +63,13 @@ function Restaurant() {
 	const [isFetching, setIsFetching] = useState<boolean>(true);
 	useEffect(() => {
 		setRestaurant(null);
+		setReviews([]);
 		setIsFetching(true);
 
 		getRestaurant(id).then(
 			(data) => {
 				setRestaurant(data);
+				setReviews(data.reviews);
 				setIsFetching(false);
 			},
 			() => history.push('/404')
@@ -98,6 +101,21 @@ function Restaurant() {
 		}
 	);
 
+	const [reviews, setReviews] = useState<RestaurantReview[]>([]);
+	const reviewsDom = useMemo(() => {
+		return reviews.map((review, i) => {
+			return (
+				<li key={i} className="mb-8">
+					<AppReviewCard
+						review={review}
+						isCondensed={true}
+						groupedBy={GroupedBy.RESTAURANT}
+					/>
+				</li>
+			);
+		});
+	}, [reviews]);
+
 	const formElement = useRef<HTMLFormElement>(null);
 	const [reviewTitle, setReviewTitle] = useState<string>('');
 	const [reviewBody, setReviewBody] = useState<string>('');
@@ -109,8 +127,12 @@ function Restaurant() {
 
 	const [reviewPostingState, setReviewPostingState] =
 		useState<ReviewPostingState>(ReviewPostingState.NONE);
-	const submitReview = async (): Promise<void> => {
-		const isFormValid = formElement.current?.checkValidity() ?? false;
+	const submitReview = async (e: FormEvent | MouseEvent): Promise<void> => {
+		e.preventDefault();
+
+		if (!formElement.current) return;
+
+		const isFormValid = formElement.current.checkValidity();
 
 		/*
 		 * NOTE: Since the rating use `<input type="range">`, they will never throw an error
@@ -294,160 +316,176 @@ function Restaurant() {
 									</Link>
 								</div>
 							)}
-							{reviewPostingState !==
-								ReviewPostingState.ALREADY_DONE && (
-								<form
-									className="lg:col-span-2 relative"
-									ref={formElement}
-									onSubmit={submitReview}
-								>
-									{reviewPostingState ===
-										ReviewPostingState.IN_PROGRESS && (
-										<div className="absolute inset-0 flex flex-col items-center justify-center gap-y-3">
-											<ProgressBarRound32 className="w-12 h-12 animate-spin" />
-											Posting review, please wait&hellip;
-										</div>
-									)}
-									{reviewPostingState ===
-										ReviewPostingState.DONE && (
-										<div className="absolute inset-0 flex flex-col items-center justify-center gap-y-3 text-green-500">
-											<CheckmarkOutline32 className="w-12 h-12" />
-											Review successfully posted!
-										</div>
-									)}
-									<GenericHeading level={2}>
-										Share the experience
-									</GenericHeading>
-									<div
-										className={
-											(reviewPostingState !==
-											ReviewPostingState.NONE
-												? 'opacity-30 pointer-events-none filter blur-sm'
-												: 'opacity-100') +
-											' transition-all'
-										}
-									>
-										<GenericFormFieldset legend="Overview">
-											<GenericFormControlGroup label="Title">
-												<GenericInputText
-													value={reviewTitle}
-													onChange={(e) =>
-														setReviewTitle(
-															e.target.value
-														)
-													}
-													placeholder="An attention-grabbing title"
-													required={true}
-												/>
-											</GenericFormControlGroup>
-											<GenericFormControlGroup label="Experience">
-												<GenericTextarea
-													value={reviewBody}
-													onChange={(e) =>
-														setReviewBody(
-															e.target.value
-														)
-													}
-													placeholder="Share your experience"
-													required={true}
-												/>
-											</GenericFormControlGroup>
-										</GenericFormFieldset>
+							<div className="lg:col-span-2">
+								<GenericHeading level={2}>
+									What others are saying
+								</GenericHeading>
 
-										<GenericFormFieldset legend="The Burger">
-											<div className="block lg:flex lg:justify-between">
-												<label className="flex lg:flex-col">
-													<div className="py-2 cursor-pointer flex-grow lg:order-2 flex gap-1 items-center justify-start lg:justify-center mr-3 lg:mr-0">
-														<Taste20 />
-														Taste
-													</div>
-													<GenericInputRating
-														iconSize={
-															RatingIconSize.LARGE
-														}
-														value={tasteRating}
-														onChange={(e) =>
-															setTasteRating(
-																+e.target.value
-															)
-														}
-														required={true}
-													/>
-												</label>
-												<label className="flex lg:flex-col">
-													<div className="py-2 cursor-pointer flex-grow lg:order-2 flex gap-1 items-center justify-start lg:justify-center mr-3 lg:mr-0">
-														<FingerprintRecognition20 />
-														Texture
-													</div>
-													<GenericInputRating
-														iconSize={
-															RatingIconSize.LARGE
-														}
-														value={textureRating}
-														onChange={(e) =>
-															setTextureRating(
-																+e.target.value
-															)
-														}
-														required={true}
-													/>
-												</label>
-												<label className="flex lg:flex-col">
-													<div className="py-2 cursor-pointer flex-grow lg:order-2 flex gap-1 items-center justify-start lg:justify-center mr-3 lg:mr-0">
-														<View20 />
-														Presentation
-													</div>
-													<GenericInputRating
-														iconSize={
-															RatingIconSize.LARGE
-														}
-														value={
-															presentationRating
-														}
-														onChange={(e) =>
-															setPresentationRating(
-																+e.target.value
-															)
-														}
-														required={true}
-													/>
-												</label>
+								<ul className="mb-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-x-8">
+									{reviewsDom}
+								</ul>
+
+								{reviewPostingState !==
+									ReviewPostingState.ALREADY_DONE && (
+									<form
+										className="relative"
+										ref={formElement}
+										onSubmit={submitReview}
+									>
+										{reviewPostingState ===
+											ReviewPostingState.IN_PROGRESS && (
+											<div className="absolute inset-0 flex flex-col items-center justify-center gap-y-3">
+												<ProgressBarRound32 className="w-12 h-12 animate-spin" />
+												Posting review, please
+												wait&hellip;
 											</div>
-											{!isReviewValid &&
-												(!tasteRating ||
-													!textureRating ||
-													!presentationRating) && (
-													<div className="flex justify-center">
-														<GenericFormErrorMessage>
-															Please select a
-															rating for all
-															categories
-														</GenericFormErrorMessage>
-													</div>
-												)}
-											<div className="mt-6">
-												<GenericFormControlGroup label="Photo(s)">
-													<GenericInputFile
-														accept="image/*"
+										)}
+										{reviewPostingState ===
+											ReviewPostingState.DONE && (
+											<div className="absolute inset-0 flex flex-col items-center justify-center gap-y-3 text-green-500">
+												<CheckmarkOutline32 className="w-12 h-12" />
+												Review successfully posted!
+											</div>
+										)}
+										<GenericHeading level={2}>
+											Share the experience
+										</GenericHeading>
+										<div
+											className={
+												(reviewPostingState !==
+												ReviewPostingState.NONE
+													? 'opacity-30 pointer-events-none filter blur-sm'
+													: 'opacity-100') +
+												' transition-all'
+											}
+										>
+											<GenericFormFieldset legend="Overview">
+												<GenericFormControlGroup label="Title">
+													<GenericInputText
+														value={reviewTitle}
 														onChange={(e) =>
-															setImageFiles(e)
+															setReviewTitle(
+																e.target.value
+															)
 														}
+														placeholder="An attention-grabbing title"
+														required={true}
 													/>
 												</GenericFormControlGroup>
+												<GenericFormControlGroup label="Experience">
+													<GenericTextarea
+														value={reviewBody}
+														onChange={(e) =>
+															setReviewBody(
+																e.target.value
+															)
+														}
+														placeholder="Share your experience"
+														required={true}
+													/>
+												</GenericFormControlGroup>
+											</GenericFormFieldset>
+
+											<GenericFormFieldset legend="The Burger">
+												<div className="block lg:flex lg:justify-between">
+													<label className="flex lg:flex-col">
+														<div className="py-2 cursor-pointer flex-grow lg:order-2 flex gap-1 items-center justify-start lg:justify-center mr-3 lg:mr-0">
+															<Taste20 />
+															Taste
+														</div>
+														<GenericInputRating
+															iconSize={
+																RatingIconSize.LARGE
+															}
+															value={tasteRating}
+															onChange={(e) =>
+																setTasteRating(
+																	+e.target
+																		.value
+																)
+															}
+															required={true}
+														/>
+													</label>
+													<label className="flex lg:flex-col">
+														<div className="py-2 cursor-pointer flex-grow lg:order-2 flex gap-1 items-center justify-start lg:justify-center mr-3 lg:mr-0">
+															<FingerprintRecognition20 />
+															Texture
+														</div>
+														<GenericInputRating
+															iconSize={
+																RatingIconSize.LARGE
+															}
+															value={
+																textureRating
+															}
+															onChange={(e) =>
+																setTextureRating(
+																	+e.target
+																		.value
+																)
+															}
+															required={true}
+														/>
+													</label>
+													<label className="flex lg:flex-col">
+														<div className="py-2 cursor-pointer flex-grow lg:order-2 flex gap-1 items-center justify-start lg:justify-center mr-3 lg:mr-0">
+															<View20 />
+															Presentation
+														</div>
+														<GenericInputRating
+															iconSize={
+																RatingIconSize.LARGE
+															}
+															value={
+																presentationRating
+															}
+															onChange={(e) =>
+																setPresentationRating(
+																	+e.target
+																		.value
+																)
+															}
+															required={true}
+														/>
+													</label>
+												</div>
+												{!isReviewValid &&
+													(!tasteRating ||
+														!textureRating ||
+														!presentationRating) && (
+														<div className="flex justify-center">
+															<GenericFormErrorMessage>
+																Please select a
+																rating for all
+																categories
+															</GenericFormErrorMessage>
+														</div>
+													)}
+												<div className="mt-6">
+													<GenericFormControlGroup label="Photo(s)">
+														<GenericInputFile
+															multiple={true}
+															accept="image/*"
+															onChange={(e) =>
+																setImageFiles(e)
+															}
+														/>
+													</GenericFormControlGroup>
+												</div>
+											</GenericFormFieldset>
+											<div className="mt-3">
+												<GenericButton
+													role={ButtonRole.PRIMARY}
+													onClick={submitReview}
+												>
+													Submit
+												</GenericButton>
 											</div>
-										</GenericFormFieldset>
-										<div className="mt-3">
-											<GenericButton
-												role={ButtonRole.PRIMARY}
-												type="button"
-												onClick={submitReview}
-											>
-												Submit
-											</GenericButton>
 										</div>
-									</div>
-								</form>
-							)}
+									</form>
+								)}
+							</div>
 						</div>
 					</LayoutContainer>
 				</>

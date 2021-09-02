@@ -37,7 +37,7 @@ function GenericInputFile(props: GenericInputFileProps) {
 
 		const dom = Array.from(files).map((file, i) => {
 			return (
-				<li key={i} className="block">
+				<li key={i} className="block mb-2">
 					<GenericFileUploadEntry
 						file={file}
 						onCancel={() => removeFile(i)}
@@ -52,26 +52,32 @@ function GenericInputFile(props: GenericInputFileProps) {
 
 	return (
 		<div>
-			<div
-				className="
-				relative rounded-md px-4 py-2 bg-opacity-40 border-0 outline-none w-full h-64 transition-all
-				flex flex-col items-center justify-center gap-y-3 mb-3
-				bg-gray-300 focus-within:ring-2 focus-within:ring-gray-700 focus-within:ring-opacity-60
-				dark:bg-gray-500 dark:focus-within:ring-gray-300
-			"
-			>
-				<DropPhoto32 className="w-10 h-10" />
-				Drop or select{' '}
-				{pluralize(props.multiple ? 2 : 1, 'an image', 'image(s)')} to
-				upload
-				<input
-					className="absolute top-0 left-0 opacity-0 w-full h-full"
-					type="file"
-					accept={props.accept ?? ''}
-					multiple={props.multiple}
-					onChange={onChange}
-				/>
-			</div>
+			{(props.multiple || (!props.multiple && files.length === 0)) && (
+				<div
+					className="
+					relative rounded-md px-4 py-2 bg-opacity-40 border-0 outline-none w-full h-64 transition-all
+					flex flex-col items-center justify-center gap-y-3 mb-3
+					bg-gray-300 focus-within:ring-2 focus-within:ring-gray-700 focus-within:ring-opacity-60
+					dark:bg-gray-500 dark:focus-within:ring-gray-300
+				"
+				>
+					<DropPhoto32 className="w-10 h-10" />
+					Drop or select{' '}
+					{pluralize(
+						props.multiple ? 2 : 1,
+						'an image',
+						'image(s)'
+					)}{' '}
+					to upload
+					<input
+						className="absolute top-0 left-0 opacity-0 w-full h-full"
+						type="file"
+						accept={props.accept ?? ''}
+						multiple={props.multiple}
+						onChange={onChange}
+					/>
+				</div>
+			)}
 			{!!imagesDom && (
 				<ul
 					className={`grid grid-cols-1${

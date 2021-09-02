@@ -1,9 +1,9 @@
 import { sleep } from '../framework/generic';
 import { haystackContainsNeedle } from '../framework/string';
-import { RestaurantDatum } from '../interfaces/api';
+import { RestaurantDatum, RestaurantReview } from '../interfaces/api';
 
 /** @constant */
-const basicRestaurantsData: RestaurantDatum[] = [
+export const restaurantData: RestaurantDatum[] = [
 	{
 		id: 'gourmet-burger-kitchen',
 		name: 'Gourmet Burger Kitchen',
@@ -103,7 +103,7 @@ const basicRestaurantsData: RestaurantDatum[] = [
 			},
 		],
 		ratingCount: 302,
-		averageRatingScore: 4.2,
+		averageRatingScore: 3.2,
 		image: '/images/restaurants/cafe-atrix--640.jpeg',
 	},
 	{
@@ -137,7 +137,7 @@ const basicRestaurantsData: RestaurantDatum[] = [
 			},
 		],
 		ratingCount: 302,
-		averageRatingScore: 3.9,
+		averageRatingScore: 3.4,
 		image: '/images/restaurants/saint-bernaise--640.jpeg',
 	},
 	{
@@ -180,7 +180,7 @@ const basicRestaurantsData: RestaurantDatum[] = [
 export async function getBasicRestaurantsData(
 	query: string = ''
 ): Promise<RestaurantDatum[]> {
-	const filteredData = basicRestaurantsData.filter((entry) => {
+	const filteredData = restaurantData.filter((entry) => {
 		if (!query) {
 			return true;
 		}
@@ -197,16 +197,42 @@ export async function getBasicRestaurantsData(
 }
 
 /** @method */
-export async function getRestaurant(id: string): Promise<RestaurantDatum> {
+export async function getRestaurant(id: string): Promise<RestaurantDatum & { reviews: RestaurantReview[] }> {
 	try {
-		const foundRestaurant = basicRestaurantsData.find(
+		const foundRestaurant = restaurantData.find(
 			(entry) => entry.id === id
 		);
 		if (!foundRestaurant)
 			throw new Error(`Restaurant with the ID ${id} cannot be found`);
 		await sleep(1000);
-		return foundRestaurant;
+
+		return {
+			...foundRestaurant,
+			reviews: generateFakeReviews(foundRestaurant.id, foundRestaurant.name)
+		};
 	} catch (e) {
 		throw e;
 	}
+}
+
+function generateFakeReviews(restaurantId: string, restaurantName: string): RestaurantReview[] {
+	return [{
+		author: 'Terry Mun',
+		title: 'Amazing burger',
+		body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque interdum augue purus, at posuere velit facilisis ac. In accumsan fringilla gravida. Sed vulputate dictum mauris, et iaculis erat finibus vel.',
+		tasteRating: 4,
+		textureRating: 5,
+		presentationRating: 5,
+		restaurantId,
+		restaurantName,
+	}, {
+		author: 'Terry Mun',
+		title: 'Could be better',
+		body: 'Fusce a fringilla velit. Donec eget dolor eros. Sed et mauris non enim rutrum venenatis. Praesent varius risus nec ipsum mollis, eu efficitur massa facilisis.',
+		tasteRating: 2,
+		textureRating: 5,
+		presentationRating: 1,
+		restaurantId,
+		restaurantName,
+	}];
 }

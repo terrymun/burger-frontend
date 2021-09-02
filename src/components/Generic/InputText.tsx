@@ -13,6 +13,7 @@ import GenericFormErrorMessage from './FormErrorMessage';
 interface GenericInputTextProps
 	extends TextLikeInputComponent<HTMLInputElement> {
 	type?: 'text' | 'password' | 'search';
+	isInvalid?: boolean;
 }
 
 /** @method */
@@ -24,13 +25,15 @@ function GenericInputText(props: GenericInputTextProps) {
 		props.onChange && props.onChange(e);
 	};
 	const onInvalid = (e: FormEvent<HTMLInputElement>): void => {
-		setErrorMessage((e.target as HTMLInputElement).validationMessage);
+		setErrorMessage(e.currentTarget.validationMessage);
 		props.onInvalid && props.onInvalid(e);
 	};
 
 	const classNames = useMemo(() => {
-		return getBaseInputClasses(!!errorMessage, ['resize-y']);
-	}, [errorMessage]);
+		return getBaseInputClasses(!!errorMessage || !!props.isInvalid, [
+			'resize-y',
+		]);
+	}, [errorMessage, props.isInvalid]);
 
 	return (
 		<>

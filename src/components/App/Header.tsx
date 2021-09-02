@@ -17,7 +17,7 @@ import {
 } from '@carbon/icons-react';
 
 // NOTE: User data should be populated by JWT and some kind of global state management system (e.g. Redux)
-import { userData } from '../../constants/user';
+import { userPersonalData } from '../../constants/user';
 import { useEffect, useState } from 'react';
 
 /** @interface */
@@ -110,7 +110,7 @@ function AppHeader() {
 								<span className="hidden sm:inline-block">
 									Hello,&nbsp;
 								</span>
-								<strong>{userData.firstName}</strong>
+								<strong>{userPersonalData.firstName}</strong>
 							</span>
 						</NavLink>
 					</li>

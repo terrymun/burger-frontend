@@ -11,6 +11,7 @@ export function getBaseInputClasses(
 		'bg-opacity-40',
 		'border-0',
 		'outline-none',
+		'focus:ring-2',
 		'w-full',
 		'transition-all',
 		'focus:ring-opacity-60',
@@ -20,11 +21,11 @@ export function getBaseInputClasses(
 
 	if (isInvalid) {
 		classes.push(
-			'ring-red-500',
+			'focus:ring-red-600',
 			'bg-red-100',
 			'text-red-500',
 			'placeholder-red-500',
-			'dark:ring-red-200',
+			'dark:ring-red-300',
 			'dark:bg-red-300',
 			'dark:text-red-700',
 			'dark:placeholder-red-700'
@@ -32,7 +33,6 @@ export function getBaseInputClasses(
 	} else {
 		classes.push(
 			'bg-gray-300',
-			'focus:ring-2',
 			'focus:ring-gray-700',
 			'dark:bg-gray-500',
 			'dark:focus:ring-gray-300'
