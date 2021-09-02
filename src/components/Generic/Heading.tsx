@@ -12,6 +12,7 @@ interface GenericHeadingProps
 	extends SlottableComponent,
 		Partial<ClassNameInheritableComponent> {
 	level: 1 | 2 | 3 | 4 | 5 | 6;
+	id?: string;
 }
 
 /** @constant */
@@ -37,7 +38,11 @@ function GenericHeading(props: GenericHeadingProps) {
 		textSizeClassName[level],
 	].join(' ');
 
-	return <HeadingTag className={classNames}>{props.children}</HeadingTag>;
+	return (
+		<HeadingTag className={classNames} id={props.id}>
+			{props.children}
+		</HeadingTag>
+	);
 }
 
 export default GenericHeading;

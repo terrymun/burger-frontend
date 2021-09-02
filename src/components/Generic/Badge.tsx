@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 /** @enum */
 export enum BadgeType {
 	PRIMARY,
-	SLEEP,
+	ASLEEP,
 }
 
 /** @enum */
@@ -41,7 +41,7 @@ function GenericBadge(props: GenericBadgeProps) {
 			classNames.push('text-white', 'bg-yellow-500');
 			break;
 
-		case BadgeType.SLEEP:
+		case BadgeType.ASLEEP:
 			classNames.push('text-white', 'bg-purple-800');
 			break;
 

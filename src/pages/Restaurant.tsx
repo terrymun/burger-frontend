@@ -28,6 +28,7 @@ import {
 	StarReview20,
 	Taste20,
 	Time20,
+	LightFilled16,
 } from '@carbon/icons-react';
 import LayoutContainer from '../components/Layout/Container';
 import GenericHeading from '../components/Generic/Heading';
@@ -45,6 +46,8 @@ import GenericBadge, {
 } from '../components/Generic/Badge';
 import GenericFormErrorMessage from '../components/Generic/FormErrorMessage';
 import AppReviewCard, { GroupedBy } from '../components/App/ReviewCard';
+import GenericStickySubNavigation from '../components/Generic/StickySubNavigation';
+import GenericHashLink from '../components/Generic/HashLink';
 
 /** @enum */
 enum ReviewPostingState {
@@ -205,9 +208,11 @@ function Restaurant() {
 				<>
 					<LayoutContainer tag="section" className="py-12">
 						<div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-16 animate-pulse ">
-							<div className="rounded-md h-96 bg-gray-400"></div>
+							<div className="rounded-md h-64 sm:h-96 bg-gray-400"></div>
 							<div className="hidden lg:block col-span-2">
-								<div className="mb-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-x-8">
+								<div className="mb-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-8">
+									<div className="rounded-md h-64 bg-gray-400"></div>
+									<div className="rounded-md h-64 bg-gray-400"></div>
 									<div className="rounded-md h-64 bg-gray-400"></div>
 									<div className="rounded-md h-64 bg-gray-400"></div>
 								</div>
@@ -220,10 +225,32 @@ function Restaurant() {
 			)}
 			{!!restaurant && (
 				<>
+					<GenericStickySubNavigation>
+						<ul className="flex">
+							<li className="flex-grow text-center">
+								<GenericHashLink href="#about">
+									About
+								</GenericHashLink>
+							</li>
+							<li className="flex-grow text-center">
+								<GenericHashLink href="#reviews">
+									Reviews
+								</GenericHashLink>
+							</li>
+							<li className="flex-grow text-center">
+								<GenericHashLink href="#review-form">
+									Write review
+								</GenericHashLink>
+							</li>
+						</ul>
+					</GenericStickySubNavigation>
+
 					<LayoutContainer tag="section" className="py-12">
 						<div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
 							<aside>
-								<GenericHeading level={2}>About</GenericHeading>
+								<GenericHeading level={2} id="about">
+									About
+								</GenericHeading>
 
 								{/* Reviews */}
 								<div
@@ -255,12 +282,21 @@ function Restaurant() {
 										<span>Hours</span>
 									</div>
 									<div>
-										{!isRestaurantOpen(
+										{isRestaurantOpen(
 											restaurant.businessHours
-										) && (
+										) ? (
 											<GenericBadge
 												size={BadgeSize.SMALL}
-												type={BadgeType.SLEEP}
+												type={BadgeType.PRIMARY}
+												className="mb-2 inline-flex gap-x-1 items-center"
+											>
+												<LightFilled16 />
+												Open
+											</GenericBadge>
+										) : (
+											<GenericBadge
+												size={BadgeSize.SMALL}
+												type={BadgeType.ASLEEP}
 												className="mb-2 inline-flex gap-x-1 items-center"
 											>
 												<AsleepFilled16 />
@@ -324,7 +360,7 @@ function Restaurant() {
 								</div>
 							)}
 							<div className="lg:col-span-2">
-								<GenericHeading level={2}>
+								<GenericHeading level={2} id="reviews">
 									What others are saying
 								</GenericHeading>
 
@@ -354,7 +390,10 @@ function Restaurant() {
 												Review successfully posted!
 											</div>
 										)}
-										<GenericHeading level={2}>
+										<GenericHeading
+											level={2}
+											id="review-form"
+										>
 											Share the experience
 										</GenericHeading>
 										<div

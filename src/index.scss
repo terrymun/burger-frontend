@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+	--scroll-padding-top: 0px;
+}
+
+html {
+	scroll-behavior: smooth;
+	scroll-padding-top: var(--scroll-padding-top, 0);
+}
+
 html,
 body,
 #root {

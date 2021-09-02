@@ -13,14 +13,14 @@ export const restaurantData: RestaurantDatum[] = [
 		coordinates: [10.209614542314284, 56.16040213991721],
 		businessHours: [
 			{
-				dayRange: [1, 5],
+				dayRange: [1, 3],
 				timeRange: [
 					{ hour: 13, minute: 0 },
 					{ hour: 20, minute: 0 },
 				],
 			},
 			{
-				dayRange: [6],
+				dayRange: [5, 6],
 				timeRange: [
 					{ hour: 11, minute: 30 },
 					{ hour: 23, minute: 0 },

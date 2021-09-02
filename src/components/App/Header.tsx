@@ -94,7 +94,7 @@ function AppHeader() {
 	);
 
 	return (
-		<header className="sticky top-0 z-10 bg-gray-50 dark:bg-gray-900 backdrop-filter backdrop-blur-sm bg-opacity-90 transition-colors">
+		<header className="sticky top-0 z-20 bg-gray-50 dark:bg-gray-900 backdrop-filter backdrop-blur-sm bg-opacity-90 transition-colors">
 			<LayoutContainer className="flex justify-between items-center">
 				<ul className="list-none flex">{listItems}</ul>
 				<ul className="list-none flex">
