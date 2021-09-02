@@ -9,6 +9,7 @@ import { RestaurantDatum } from '../interfaces/api';
 import { pluralize } from '../framework/string';
 
 // Component imports
+import { FaceDizzy32 } from '@carbon/icons-react';
 import AppSearchForm from '../components/App/SearchForm';
 import GenericHeading from '../components/Generic/Heading';
 import LayoutContainer from '../components/Layout/Container';
@@ -26,20 +27,23 @@ function User() {
 	const [restaurants, setRestaurants] = useState<RestaurantDatum[]>([]);
 	const [isFetching, setIsFetching] = useState<boolean>(true);
 
+	const focusSearchField = () => {
+		(
+			document.querySelector('input[type="search"]') as HTMLInputElement
+		)?.focus();
+	};
+
 	useEffect(() => {
 		setRestaurants([]);
 		setIsFetching(true);
 
-		if (!query)
-			(
-				document.querySelector(
-					'input[type="search"]'
-				) as HTMLInputElement
-			)?.focus();
+		if (!query) focusSearchField();
 
 		getBasicRestaurantsData(query).then((data) => {
 			setRestaurants(data);
 			setIsFetching(false);
+
+			if (data.length === 0) focusSearchField();
 		});
 	}, [query]);
 
@@ -99,13 +103,14 @@ function User() {
 					</>
 				)}
 				{!!(query && !isFetching && !restaurants.length) && (
-					<>
+					<div className="text-center py-10">
+						<FaceDizzy32 className="w-16 h-16 mx-auto" />
 						<GenericHeading level={2}>Whoops!</GenericHeading>
 						<p>
 							Looks like your search returned no results. Try
 							again with another keyword?
 						</p>
-					</>
+					</div>
 				)}
 			</section>
 		</LayoutContainer>
