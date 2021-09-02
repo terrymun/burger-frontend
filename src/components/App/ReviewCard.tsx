@@ -83,19 +83,19 @@ function AppReviewCard(props: AppReviewCardProps) {
 				</section>
 				<footer className="px-6 py-3 bg-gray-100 dark:bg-gray-600 dark:bg-opacity-40 text-gray-400 dark:text-gray-400 transition-colors text-sm">
 					<ul className="flex justify-between items-center flex-wrap gap-4">
-						<li className="flex flex-col items-center justify-start mx-auto">
+						<li className="flex flex-col items-center justify-start mx-auto flex-grow">
 							<GenericRating score={tasteRating} />
 							<span className="flex items-center gap-x-0.5 mt-2">
 								<Taste16 /> Taste
 							</span>
 						</li>
-						<li className="flex flex-col items-center justify-start mx-auto">
+						<li className="flex flex-col items-center justify-start mx-auto flex-grow">
 							<GenericRating score={textureRating} />
 							<span className="flex items-center gap-x-0.5 mt-2">
 								<FingerprintRecognition16 /> Texture
 							</span>
 						</li>
-						<li className="flex flex-col items-center justify-start mx-auto">
+						<li className="flex flex-col items-center justify-start mx-auto flex-grow">
 							<GenericRating score={presentationRating} />
 							<span className="flex items-center gap-x-0.5 mt-2">
 								<Sight16 /> Presentation
