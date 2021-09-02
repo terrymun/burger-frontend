@@ -204,9 +204,16 @@ function Restaurant() {
 			{isFetching && (
 				<>
 					<LayoutContainer tag="section" className="py-12">
-						<div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-16">
-							<div className="rounded-md h-64 animate-pulse bg-gray-400 transition-colors"></div>
-							<div className="hidden lg:block rounded-md col-span-2 h-64 animate-pulse bg-gray-400 transition-colors"></div>
+						<div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-16 animate-pulse ">
+							<div className="rounded-md h-96 bg-gray-400"></div>
+							<div className="hidden lg:block col-span-2">
+								<div className="mb-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-x-8">
+									<div className="rounded-md h-64 bg-gray-400"></div>
+									<div className="rounded-md h-64 bg-gray-400"></div>
+								</div>
+
+								<div className="hidden rounded-md h-64 bg-gray-400"></div>
+							</div>
 						</div>
 					</LayoutContainer>
 				</>
@@ -474,14 +481,15 @@ function Restaurant() {
 													</GenericFormControlGroup>
 												</div>
 											</GenericFormFieldset>
-											<div className="mt-3">
+
+											<GenericFormControlGroup>
 												<GenericButton
 													role={ButtonRole.PRIMARY}
 													onClick={submitReview}
 												>
 													Submit
 												</GenericButton>
-											</div>
+											</GenericFormControlGroup>
 										</div>
 									</form>
 								)}
