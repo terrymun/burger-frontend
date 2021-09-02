@@ -217,8 +217,8 @@ export async function getRestaurant(id: string): Promise<RestaurantDatum & { rev
 
 function generateFakeReviews(restaurantId: string, restaurantName: string): RestaurantReview[] {
 	return [{
-		author: 'Terry Mun',
-		title: 'Amazing burger',
+		author: 'Ulya Haider',
+		title: 'Burger that melts in your mouth',
 		body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque interdum augue purus, at posuere velit facilisis ac. In accumsan fringilla gravida. Sed vulputate dictum mauris, et iaculis erat finibus vel.',
 		tasteRating: 4,
 		textureRating: 5,
@@ -226,12 +226,30 @@ function generateFakeReviews(restaurantId: string, restaurantName: string): Rest
 		restaurantId,
 		restaurantName,
 	}, {
-		author: 'Terry Mun',
-		title: 'Could be better',
+		author: 'Rebecca Eadwald',
+		title: 'Just great texture',
 		body: 'Fusce a fringilla velit. Donec eget dolor eros. Sed et mauris non enim rutrum venenatis. Praesent varius risus nec ipsum mollis, eu efficitur massa facilisis.',
 		tasteRating: 2,
 		textureRating: 5,
-		presentationRating: 1,
+		presentationRating: 3,
+		restaurantId,
+		restaurantName,
+	}, {
+		author: 'Riley Mccormick',
+		title: 'Stellar taste',
+		body: 'Donec id ultricies quam. Curabitur mi purus, consectetur tristique semper et, consectetur at dui. Aenean condimentum purus non mattis feugiat.',
+		tasteRating: 5,
+		textureRating: 5,
+		presentationRating: 3,
+		restaurantId,
+		restaurantName,
+	}, {
+		author: 'Lionel Gillespie',
+		title: 'A little too salty',
+		body: 'Ut convallis eleifend eros eget tristique. Aliquam erat volutpat. Integer cursus pulvinar massa vitae porttitor. Sed blandit lorem nec nulla lacinia, nec convallis diam placerat.',
+		tasteRating: 1,
+		textureRating: 3,
+		presentationRating: 4,
 		restaurantId,
 		restaurantName,
 	}];

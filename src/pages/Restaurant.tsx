@@ -105,7 +105,7 @@ function Restaurant() {
 	const reviewsDom = useMemo(() => {
 		return reviews.map((review, i) => {
 			return (
-				<li key={i} className="mb-8">
+				<li key={i} className={`mb-8`}>
 					<AppReviewCard
 						review={review}
 						isCondensed={true}
@@ -212,7 +212,7 @@ function Restaurant() {
 									<div className="rounded-md h-64 bg-gray-400"></div>
 								</div>
 
-								<div className="hidden rounded-md h-64 bg-gray-400"></div>
+								<div className="hidden lg:block rounded-md h-96 bg-gray-400"></div>
 							</div>
 						</div>
 					</LayoutContainer>
