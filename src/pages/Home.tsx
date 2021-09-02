@@ -24,7 +24,7 @@ function Home() {
 					<strong className="text-gradient">definitive guide</strong>{' '}
 					to amazing burgers no matter where you are.
 				</p>
-				<AppSearchForm />
+				<AppSearchForm autofocus={true} />
 			</LayoutContainer>
 		</>
 	);

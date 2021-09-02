@@ -7,6 +7,7 @@ import { FormEvent, useState } from 'react';
 /** @interface */
 interface AppSearchFormProps {
 	query?: string;
+	autofocus?: boolean;
 }
 
 /** @method */
@@ -32,7 +33,7 @@ function AppSearchForm(props: AppSearchFormProps) {
 					placeholder="Search for burgers"
 					value={query}
 					onChange={(e) => setQuery(e.target.value)}
-					autofocus={true}
+					autofocus={props.autofocus}
 				/>
 				<GenericButton role={searchButtonRole} type="submit">
 					<Search24 />

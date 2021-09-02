@@ -30,6 +30,13 @@ function User() {
 		setRestaurants([]);
 		setIsFetching(true);
 
+		if (!query)
+			(
+				document.querySelector(
+					'input[type="search"]'
+				) as HTMLInputElement
+			)?.focus();
+
 		getBasicRestaurantsData(query).then((data) => {
 			setRestaurants(data);
 			setIsFetching(false);
