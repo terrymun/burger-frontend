@@ -51,13 +51,13 @@ function AppReviewCard(props: AppReviewCardProps) {
 						<span className="italic">&ldquo;{title}&rdquo;</span>
 					</GenericHeading>
 					<div className="flex gap-x-1 items-center">
-						{props.groupedBy === GroupedBy.AUTHOR && (
+						{props.groupedBy === GroupedBy.RESTAURANT && (
 							<>
 								<User16 />
 								{author}
 							</>
 						)}
-						{props.groupedBy === GroupedBy.RESTAURANT && (
+						{props.groupedBy === GroupedBy.AUTHOR && (
 							<>
 								<Restaurant16 />
 								{restaurantName}
