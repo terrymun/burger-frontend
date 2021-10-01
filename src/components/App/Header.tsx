@@ -47,6 +47,12 @@ function AppHeader() {
 	};
 	useEffect(() => {
 		document.documentElement.classList.toggle('dark', shouldUseDarkTheme);
+		document
+			.querySelector('#theme-color')
+			?.setAttribute(
+				'content',
+				shouldUseDarkTheme ? '#111827' : '#F9FAFB'
+			);
 	});
 
 	const items: NavigationItem[] = [
